@@ -1,0 +1,2 @@
+# ScratchDay
+Scratch Day Scoreboard
