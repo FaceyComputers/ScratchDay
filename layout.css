@@ -13,6 +13,29 @@
     background-color: #25AFF4;
     color: white;
     font-family: 'Product Sans', Arial, sans-serif;
+    text-align: center;
+    font-size: 19px;
+    //display: inline-block;
+       margin: 20px 0px 20px 0px;
+    
+}
+
+.Leaderboard > #School {
+    margin: -10px -10px -10px -10px;
+}
+
+.Leaderboard > #Score {
+    color: white;
+    margin-right: 101px;
+    display: inline-block;
+    margin: 10px 10px 10px 10px;
+
+}
+
+.Leaderboard > #Total {
+    color: #F9A41D;
+    display: inline-block;
+    margin: -10px -10px -10px 30px;
 }
 
 #Total{
