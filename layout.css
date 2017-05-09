@@ -16,12 +16,13 @@
     text-align: center;
     font-size: 19px;
     //display: inline-block;
-       margin: 20px 0px 20px 0px;
+    margin: 20px 0px 20px 0px;
     
 }
 
 .Leaderboard > #School {
     margin: -10px -10px -10px -10px;
+    padding: 3px;
 }
 
 .Leaderboard > #Score {
@@ -29,6 +30,7 @@
     margin-right: 101px;
     display: inline-block;
     margin: 10px 10px 10px 10px;
+    padding: 0px 0px -10px 0px;
 
 }
 
