@@ -1,4 +1,4 @@
-var myVar = setInterval(changeTitle, 800);
+setInterval(changeTitle, 800);
 
 var time = 0;
 
@@ -6,6 +6,7 @@ function changeTitle()
 {
     if(time < 10)
     {
+    document.getElementsByClassName("Leaderboard")[0].style = "margin-top: 10px;";
     document.getElementById("Main_title").style = "opacity: 1;"; 
     document.getElementById("Main_title").style.transition = "all 1s"; 
     document.getElementById("Main_title").style.WebkitTransition = "all 1s";

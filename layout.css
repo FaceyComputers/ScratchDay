@@ -16,8 +16,9 @@
     text-align: center;
     font-size: 19px;
     //display: inline-block;
-    margin: 25px 0px 25px 0px;
-    
+    padding: 26px 0px 26px 0px;
+    margin: 25px 0px -13px 0px;
+    transition: all 2s ease;
 }
 
 .Leaderboard > #School {
@@ -43,5 +44,7 @@
 #Total{
     background-color: #25AFF4;
     color: white;
+    margin: 27px 0px 0px 0px;
+    padding: 0px 0px px 0px;
     font-family: 'Product Sans', Arial, sans-serif;
 }
