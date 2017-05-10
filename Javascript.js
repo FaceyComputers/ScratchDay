@@ -1,4 +1,5 @@
 setInterval(changeTitle, 800);
+setInterval(refreshScores, 800);
 
 var time = 0;
 
@@ -6,7 +7,6 @@ function changeTitle()
 {
     if(time < 10)
     {
-    document.getElementsByClassName("Leaderboard")[0].style = "margin-top: 10px;";
     document.getElementById("Main_title").style = "opacity: 1;"; 
     document.getElementById("Main_title").style.transition = "all 1s"; 
     document.getElementById("Main_title").style.WebkitTransition = "all 1s";
@@ -44,4 +44,10 @@ function changeTitle()
         time = 0;
     }
     time++;
+}
+
+function refreshScores()
+{
+    document.getElementById("first").style = "top: 137px;";
+    document.getElementById("second").style = "top: -137px;";
 }
