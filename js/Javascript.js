@@ -48,6 +48,6 @@ function changeTitle()
 
 function refreshScores()
 {
-    document.getElementById("first").style = "top: 137px;";
-    document.getElementById("second").style = "top: -137px;";
+    document.getElementById("first").style = "top: 147px;";
+    document.getElementById("second").style = "top: -147px;";
 }
