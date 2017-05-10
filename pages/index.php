@@ -8,12 +8,25 @@
     <link href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i' rel='stylesheet' type='text/css'>
 </head>
 <body>
+    
+    <?php
+    $str = file_get_contents("../data/schoolData.json");
+    $json = json_decode($str, true);
+    $value1 = "";
+    for($a = 0; $a <= count($json['schools']) - 1; $a++)
+    {
+	$stringvariable = (string)$a;
+       $value1 = $json['schools'][$stringvariable]['fullName'];
+	}
+            
+    ?> 
+    
     <div class = "Main" id = "Main">
     <h1 id = "Main_title" class = "Main title">Scratch Day Scoreboard 1.0</h1>
     </div>
     
     <div class = "Leaderboard" id = "first">
-        <h2 id = "School">CLB</h2>
+        <h2 id = "School"><?php echo $value1; ?></h2>
         <h2 id = "Score">Beginner: 0 Intermediate: 0 Advanced: 0</h2>
         <h2 id = "Total">Total Score: 0</h2>
     </div>
@@ -50,19 +63,6 @@
         <h2>Created by: </h2>
         <h2>Nick and Ian.</h2>
     </div>
-    
-    <?php
-    $str = file_get_contents("../data/schoolData.json");
-    $json = json_decode($str, true);
-
-    for($a = 0; $a <= count($json['schools']) - 1; $a++)
-    {
-	$stringvariable = (string)$a;
-	$variables = $json['schools'][$stringvariable]['fullName'];
-	echo $variables . PHP_EOL;
-	}
-    ?> 
-    
 </body>
     <script type = "text/javascript" src = "../js/Javascript.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
