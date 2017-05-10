@@ -1,0 +1,146 @@
+{"schools": {
+    "CLB": {
+        "name": "CLB",
+        "fullName": "Clover Bar Junior High",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "FSE": {
+        "name": "FSE",
+        "fullName": "Fort Saskatchewan Elementary",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "FRH": {
+        "name": "FRH",
+        "fullName": "F.R. Haythorne Junior High",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "FSE": {
+        "name": "FSC",
+        "fullName": "Fort Saskatchewan Christian",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "LLR": {
+        "name": "LLR",
+        "fullName": "Lakeland Ridge",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "MUN": {
+        "name": "MUN",
+        "fullName": "Mundare School",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "PNE": {
+        "name": "PNE",
+        "fullName": "Pine Street Elementary",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "RHJ": {
+        "name": "RHJ",
+        "fullName": "Rudolph Hennig Junior High",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "SCE": {
+        "name": "SCE",
+        "fullName": "Strathcona Christian Academy Elementary",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "SCS": {
+        "name": "SCS",
+        "fullName": "Strathcona Christian Academy Secondary",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "WBO": {
+        "name": "WBO",
+        "fullName": "Westboro Elementary",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "WFG": {
+        "name": "WFG",
+        "fullName": "Wes Hosford Elementary",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "SPO": {
+        "name": "SPO",
+        "fullName": "Next Step",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "AEL": {
+        "name": "AEL",
+        "fullName": "École Élémentaire Ardrossan Elementary",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "CBN": {
+        "name": "CBN",
+        "fullName": "École Campbelltown",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    },
+    
+    "EPE": {
+        "name": "EPE",
+        "fullName": "École Parc Élémentaire",
+        "Beginner": 0,
+        "Intermediate": 0,
+        "Advanced": 0,
+        "Total": 0
+    }
+    
+}}  

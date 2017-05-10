@@ -2,12 +2,12 @@
 <html>
 <body>
 
-        <?php
+<?php
 $str = file_get_contents("test.json");
 $json = json_decode($str, true);
 
-$variable = $json['schools']['CLB']['fullName'];
-echo $variable . PHP_EOL;
+$variables = $json['schools']['CLB']['Beginner'];
+echo $variables . PHP_EOL;
 ?>
 
 </body>
