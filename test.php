@@ -2,10 +2,12 @@
 <html>
 <body>
 
-<h1>My first PHP page</h1>
+        <?php
+$str = file_get_contents("test.json");
+$json = json_decode($str, true);
 
-<?php
-echo "Hello World!";
+$variable = $json['schools']['CLB']['fullName'];
+echo $variable . PHP_EOL;
 ?>
 
 </body>
