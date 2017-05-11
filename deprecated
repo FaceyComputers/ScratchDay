@@ -5,3 +5,15 @@ $json = json_decode($str, true);
 $variable = $json['schools']['CLB']['fullName'];
 echo $variable . PHP_EOL;
 ?>
+
+<?php
+    $str = file_get_contents("../data/schoolData.json");
+    $json = json_decode($str, true);
+    $value1 = "";
+    for($a = 0; $a <= count($json['schools']) - 1; $a++)
+    {
+	$stringvariable = (string)$a;
+       $value1 = $json['schools'][$stringvariable]['fullName'];
+	}
+            
+    ?> 

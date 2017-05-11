@@ -8,19 +8,6 @@
     <link href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    
-    <?php
-    $str = file_get_contents("../data/schoolData.json");
-    $json = json_decode($str, true);
-    $value1 = "";
-    for($a = 0; $a <= count($json['schools']) - 1; $a++)
-    {
-	$stringvariable = (string)$a;
-       $value1 = $json['schools'][$stringvariable]['fullName'];
-	}
-            
-    ?> 
-    
     <div class = "Main" id = "Main">
     <h1 id = "Main_title" class = "Main title">Scratch Day Scoreboard 1.0</h1>
     </div>
