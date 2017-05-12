@@ -34,7 +34,7 @@ function changeTitle()
     document.getElementById("Main_title").style.WebkitTransition = "all 1s";
     document.getElementById("Main_title").style.MozTransition = "all 1s"; 
     document.getElementById("Main_title").style.OTransition = "all 1s"; 
-    document.getElementById("Main_title").innerHTML "EIPS Scratch Day";
+    document.getElementById("Main_title").innerHTML = "EIPS Scratch Day";
     }
     if(time > 9)
     {
