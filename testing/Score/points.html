@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Add Points</title>
+<style>
+	span {
+		color: #FF0000;
+	}
+</style>
+</head>
+<body>
+	<p>Select a school:<span id="schoolSelect"></span></p>
+	<select id="school" onclick="clearErrors()">
+		<option value="">Select School:</option>
+		<option value="CLB">Clover Bar Jr. High</option>
+		<option value="CBN">Ecole Campbelltown</option>
+		<option value="AEL">Ecole Elementaire Ardrossan Elementary</option>
+		<option value="EPE">Ecole Parc Elementaire</option>
+		<option value="FSC">Fort Saskatchewan Christian</option>
+		<option value="FSE">Fort Saskatchewan Elementary</option>
+		<option value="FRH">F.R. Haythorne Jr. High</option>
+		<option value="LLR">Lakeland Ridge</option>
+		<option value="MUN">Mundare School</option>
+		<option value="SPO">Next Step</option>
+		<option value="PNE">Pine Street Elementary</option>
+		<option value="RHJ">Rudolph Hennig Jr. High</option>
+		<option value="SCE">Strathcona Christian Academy Elementary</option>
+		<option value="SCS">Strathcona Christian Academy Secondary</option>
+		<option value="WBO">Westboro Elementary</option>
+		<option value="WFG">Win Ferguson Elementary</option>
+	</select>
+	<p>Select challenge difficulty:<span id="pointSelect"></span></p>
+	<div onclick="clearErrors()">
+	<input type="radio" name="points" value="3">Beginner<br>
+	<input type="radio" name="points" value="5">Intermediate<br>
+	<input type="radio" name="points" value="15">Advanced<br>
+	</div>
+	<input type="button" name="submit" value="Submit"onclick="sendData()">
+	<p id="demo"></p>
+	<script>
+	function clearErrors(){
+		document.getElementById("schoolSelect").innerHTML = "";
+		document.getElementById("pointSelect").innerHTML = "";
+	}
+	
+	function sendData(){
+		var xhttp = new XMLHttpRequest();
+		var school = document.getElementById("school");
+		var points = document.querySelector('input[name="points"]:checked');
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("demo").innerHTML = this.responseText;
+			}
+		};
+		if (school.value !== "" && points !== null){
+			var point = points.value;
+			xhttp.open("POST", "score.php", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("school=" + school.value + "&points=" + point);
+			console.log("school=" + school.value + "&points=" + point);
+			points.checked = false;
+			school.value = "";
+		} else {
+			if (points === null){
+				document.getElementById("pointSelect").innerHTML = " *Required";
+			}
+			if (school.value === ""){
+				document.getElementById("schoolSelect").innerHTML = " *Required";
+			}
+		}
+	}
+	</script>
+</body>
+</html>
