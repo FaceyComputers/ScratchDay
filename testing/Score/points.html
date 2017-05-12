@@ -56,7 +56,6 @@
 			xhttp.open("POST", "score.php", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.send("school=" + school.value + "&points=" + point);
-			console.log("school=" + school.value + "&points=" + point);
 			points.checked = false;
 			school.value = "";
 		} else {
