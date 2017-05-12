@@ -14,7 +14,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 900
+        "Total": 0
     },
     
     "FRH": {
@@ -23,7 +23,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 190
+        "Total": 0
     },
     
     "FSC": {
@@ -32,7 +32,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 1000
+        "Total": 0
     },
     
     "LLR": {
@@ -41,7 +41,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 2
+        "Total": 0
     },
     
     "MUN": {
@@ -50,7 +50,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 1
+        "Total": 0
     },
     
     "PNE": {
@@ -59,7 +59,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 902
+        "Total": 0
     },
     
     "RHJ": {
@@ -86,7 +86,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 0
+        "Total": 100
     },
     
     "WBO": {
@@ -95,7 +95,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 200
+        "Total": 400
     },
     
     "WFG": {
@@ -104,7 +104,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 0
+        "Total": 300
     },
     
     "SPO": {
@@ -113,7 +113,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 0
+        "Total": 500
     },
     
     "AEL": {

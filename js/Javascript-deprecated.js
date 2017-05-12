@@ -1,5 +1,5 @@
 setInterval(changeTitle, 800);
-setInterval(refreshScores, 100);
+setInterval(refreshScores, 1000);
 
 var time = 0;
 var totalScore = 0;
@@ -103,59 +103,182 @@ function refreshScores()
         //console.log(schoolTotal[schoolNames[a]]);
         if(currentTotal > currentFirst)
         {
+            if(schoolName == currentSecondName || schoolName == currentThirdName || schoolName == currentForthName || schoolName == currentFifthName)
+            {
+            if(schoolName == currentSecondName)
+            {
+                document.getElementById("first").style = "top: 150px;";
+                document.getElementById("second").style = "top: -150px;";
+            }else if(schoolName == currentThirdName){
+                document.getElementById("first").style = "top: 250px;";
+                document.getElementById("third").style = "top: -250px;";
+            }else if(schoolName == currentForthName){
+                document.getElementById("first").style = "top: 350px;";
+                document.getElementById("forth").style = "top: -350px;";
+            }else if(schoolName == currentFifthName){
+                document.getElementById("first").style = "top: 650px;";
+                document.getElementById("fifth").style = "top: -650px;";
+            }
+            }else{
             document.getElementById("firstTitle").innerHTML = schoolFullNames[schoolNames[a]];
             document.getElementById("firstScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
             document.getElementById("firstTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            }
             currentFirst = currentTotal;
             currentFirstName = schoolNames[a];
         }
         
+        if(currentTotal < currentSecond && schoolName == currentFirstName)
+        {
+            document.getElementById("first").style = "top: 150px;";
+            document.getElementById("second").style = "top: -150px;";
+            currentFirst = currentSecond;
+            currentFirstName = currentSecondName;
+            clear = true;
+        }
+        
         if(currentTotal > currentSecond && currentTotal < currentFirst && clear == false)
         {           
+            if(currentSecondName == currentThirdName || currentSecondName == currentForthName || currentSecondName == currentFifthName)
+            {
+            if(schoolName == currentFirstName)
+            {
+                document.getElementById("second").style = "top: 150px;";
+                document.getElementById("first").style = "top: -150px;";
+            }else if(schoolName == currentThirdName){
+                document.getElementById("second").style = "top: 250px;";
+                document.getElementById("third").style = "top: -250px;";
+            }else if(schoolName == currentForthName){
+                document.getElementById("second").style = "top: 350px;";
+                document.getElementById("forth").style = "top: -350px;";
+            }else if(schoolName == currentFifthName){
+                document.getElementById("second").style = "top: 650px;";
+                document.getElementById("fifth").style = "top: -650px;";
+            }
+            }else{
             document.getElementById("secondTitle").innerHTML = schoolFullNames[schoolNames[a]];
             document.getElementById("secondScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
             document.getElementById("secondTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            }
             currentSecond = currentTotal;
             currentSecondName = schoolNames[a];
         }
         
+        if(currentTotal < currentThird && schoolName == currentSecondName)
+        {
+            document.getElementById("second").style = "top: 150px;";
+            document.getElementById("third").style = "top: -150px;";
+            currentSecond = currentThird;
+            currentSecondName = currentThirdName;
+            clear = true;
+        }
+        
         if(currentTotal > currentThird && currentTotal < currentSecond && clear == false)
         {
+            if(currentThirdName == currentFirstName || currentThirdName == currentSecondName || currentThirdName == currentForthName || currentThirdName == currentFifthName)
+            {
+            if(schoolName == currentFirstName)
+            {
+                document.getElementById("third").style = "top: 150px;";
+                document.getElementById("first").style = "top: -150px;";
+            }else if(schoolName == currentSecondName){
+                document.getElementById("third").style = "top: 250px;";
+                document.getElementById("second").style = "top: -250px;";
+            }else if(schoolName == currentForthName){
+                document.getElementById("third").style = "top: 350px;";
+                document.getElementById("forth").style = "top: -350px;";
+            }else if(schoolName == currentFifthName){
+                document.getElementById("third").style = "top: 650px;";
+                document.getElementById("fifth").style = "top: -650px;";
+            }
+            }else{
             document.getElementById("thirdTitle").innerHTML = schoolFullNames[schoolNames[a]];
             document.getElementById("thirdScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
             document.getElementById("thirdTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            }
             currentThird = currentTotal;
             currentThirdName = schoolNames[a];
         }
         
+        if(currentTotal < currentForth && schoolName == currentThirdName)
+        {
+            document.getElementById("third").style = "top: 150px;";
+            document.getElementById("forth").style = "top: -150px;";
+            currentThird = currentForth;
+            currentThirdName = currentForthName;
+            clear = true;
+        }
+        
         if(currentTotal > currentForth && currentTotal < currentThird && clear == false)
         {
+            if(currentForthName == currentFirstName || currentForthName == currentSecondName || currentForthName == currentThirdName || currentForthName == currentFifthName)
+            {
+            if(schoolName == currentFirstName)
+            {
+                document.getElementById("forth").style = "top: 150px;";
+                document.getElementById("first").style = "top: -150px;";
+            }else if(schoolName == currentSecondName){
+                document.getElementById("forth").style = "top: 250px;";
+                document.getElementById("second").style = "top: -250px;";
+            }else if(schoolName == currentThirdName){
+                document.getElementById("forth").style = "top: 350px;";
+                document.getElementById("third").style = "top: -350px;";
+            }else if(schoolName == currentFifthName){
+                document.getElementById("forth").style = "top: 650px;";
+                document.getElementById("fifth").style = "top: -650px;";
+            }
+            }else{
             document.getElementById("forthTitle").innerHTML = schoolFullNames[schoolNames[a]];
-            document.getElementById("forthScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
+            document.getElementById("forthScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + "Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
             document.getElementById("forthTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            }
             currentForth = currentTotal;
             currentForthName = schoolNames[a];
         }
         
+        if(currentTotal < currentFifth && schoolName == currentForthName)
+        {
+            document.getElementById("forth").style = "top: 150px;";
+            document.getElementById("fifth").style = "top: -150px;";
+            currentForth = currentFifth;
+            currentForthName = currentFifthName;
+            clear = true;
+        }
+        
         if(currentTotal > currentFifth && currentTotal < currentForth && clear == false)
         {
+            if(currentFifthName == currentFirstName || currentFifthName == currentSecondName || currentFifthName == currentThirdName || currentFifthName == currentForthName && clear == false)
+            {
+            if(schoolName == currentFirstName)
+            {
+                document.getElementById("fifth").style = "top: 150px;";
+                document.getElementById("first").style = "top: -150px;";
+            }else if(schoolName == currentSecondName){
+                document.getElementById("fifth").style = "top: 250px;";
+                document.getElementById("second").style = "top: -250px;";
+            }else if(schoolName == currentThirdName){
+                document.getElementById("fifth").style = "top: 350px;";
+                document.getElementById("third").style = "top: -350px;";
+            }else if(schoolName == currentForthName){
+                document.getElementById("fifth").style = "top: 650px;";
+                document.getElementById("forth").style = "top: -650px;";
+            }    
+            }else{
             document.getElementById("fifthTitle").innerHTML = schoolFullNames[schoolNames[a]];
             document.getElementById("fifthScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
             document.getElementById("fifthTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            }
             currentFifth = currentTotal;
             currentFifthName = schoolNames[a];
+        }
     }
     totalScore = total;
-	totalBeginnerScore = beginnerTotal;
-	totalIntermediateScore = intermediateTotal;
-	totalAdvancedScore = advancedTotal;
     //document.getElementById("first").style = "top: 150px;";
     //document.getElementById("second").style = "top: -150px;";
 }
-}
 
 $(setInterval(function () {
-        $.getJSON("../testing/Score/data.json", function(result){
+        $.getJSON("../data/schoolData.json", function(result){
             $.each(result.schools, function(school, schools){
                 schoolFullNames[schools.name] = schools.fullName;
                 schoolBeginner[schools.name] = schools.Beginner;
@@ -164,4 +287,4 @@ $(setInterval(function () {
                 schoolTotal[schools.name] = schools.Total;
             });
     });
-}, 100));
+}, 700));
