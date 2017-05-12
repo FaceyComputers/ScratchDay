@@ -4,7 +4,7 @@
 <?php
 	$school = $_POST["school"];
 	$points = $_POST["points"];
-	$json = json_decode(file_get_contents("test.json"),true);
+	$json = json_decode(file_get_contents("data.json"),true);
 	switch ($points) {
 		case 3:
 			$json["schools"][$school]["Beginner"] += $points;
@@ -17,10 +17,10 @@
 			break;
 	}
 	$json["schools"][$school]["Total"] += $points;
-	//echo "$school just earned $points points!";
-	echo $json["schools"][$school]["Total"];
-	$data = fopen("test.json","w");
-	fwrite($data,json_encode($json));
+	$full = $json["schools"][$school]["fullName"];
+	echo "$full just earned $points points!";
+	$data = fopen("data.json","w");
+	fwrite($data,json_encode($json,JSON_PRETTY_PRINT));
 	fclose($data);
 ?>
 </body>
