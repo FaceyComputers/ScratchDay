@@ -14,7 +14,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 4
+        "Total": 900
     },
     
     "FRH": {
@@ -23,16 +23,16 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 6
+        "Total": 190
     },
     
     "FSC": {
         "name": "FSC",
-        "fullName": "Fort Saskatchewan Christian",
+        "fullName": "Fort Saskatchewan Christian School",
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 3
+        "Total": 1000
     },
     
     "LLR": {
@@ -59,7 +59,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 10
+        "Total": 902
     },
     
     "RHJ": {
@@ -95,7 +95,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 100
+        "Total": 200
     },
     
     "WFG": {
