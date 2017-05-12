@@ -3,6 +3,7 @@ setInterval(refreshScores, 100);
 
 var time = 0;
 var totalScore = 0;
+var debug = false;
 var totalBeginnerScore = 0;
 var totalIntermediateScore = 0;
 var totalAdvancedScore = 0;
@@ -90,18 +91,34 @@ function refreshScores()
     var beginnerTotal = 0;
     var intermediateTotal = 0;
     var advancedTotal = 0;
-    var clear = false;
     
     for(var a = 0; a < schoolNames.length; a++)
     {
         var currentTotal = schoolTotal[schoolNames[a]];
         var schoolName = schoolNames[a];
+        var clear = false;
         total = total + currentTotal;
         beginnerTotal = beginnerTotal + schoolBeginner[schoolNames[a]];
         intermediateTotal = intermediateTotal + schoolIntermediate[schoolNames[a]];
         advancedTotal = advancedTotal + schoolAdvanced[schoolNames[a]];
         //console.log(schoolTotal[schoolNames[a]]);
-        if(currentTotal > currentFirst)
+        
+        //console.log(schoolName + " " + currentFirstName);
+        if(currentTotal > currentFirst && schoolName == currentSecondName && debug == true)
+        {
+            //console.log(currentTotal + " " + currentFirst);
+            document.getElementById("first").style = "top: 150px;";
+            document.getElementById("second").style = "top: -150px;";
+            document.getElementById("secondScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
+            document.getElementById("secondTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            currentSecond = currentFirst;
+            currentSecondName = currentFirstName;
+            currentFirst = currentTotal;
+            currentFirstName = schoolNames[a];
+            clear = true;
+        }
+        
+        if(currentTotal > currentFirst && clear == false)
         {
             document.getElementById("firstTitle").innerHTML = schoolFullNames[schoolNames[a]];
             document.getElementById("firstScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
@@ -110,13 +127,44 @@ function refreshScores()
             currentFirstName = schoolNames[a];
         }
         
+        if(currentTotal > currentSecond && schoolName == currentThirdName && clear == false && debug == true)
+        {
+            //console.log(currentTotal + " " + currentFirst);
+            document.getElementById("secondScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
+            document.getElementById("secondTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            currentFirst = currentTotal;
+            document.getElementById("second").style = "top: 150px;";
+            document.getElementById("third").style = "top: -150px;";
+            currentThird = currentSecond;
+            currentThirdName = currentSecondName;
+            currentSecond = currentTotal;
+            currentSecondName = schoolNames[a];
+            clear = true;
+        }
+        
         if(currentTotal > currentSecond && currentTotal < currentFirst && clear == false)
         {           
+            console.log("test");
             document.getElementById("secondTitle").innerHTML = schoolFullNames[schoolNames[a]];
             document.getElementById("secondScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
             document.getElementById("secondTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
             currentSecond = currentTotal;
             currentSecondName = schoolNames[a];
+        }
+        
+        if(currentTotal > currentThird && schoolName == currentForthName && clear == false && debug == true)
+        {
+            //console.log(currentTotal + " " + currentFirst);
+            document.getElementById("secondScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
+            document.getElementById("secondTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            currentFirst = currentTotal;
+            document.getElementById("third").style = "top: 150px;";
+            document.getElementById("forth").style = "top: -150px;";
+            currentForth = currentThird;
+            currentForthName = currentThirdName;
+            currentThird = currentTotal;
+            currentThirdName = schoolNames[a];
+            clear = true;
         }
         
         if(currentTotal > currentThird && currentTotal < currentSecond && clear == false)
@@ -126,6 +174,21 @@ function refreshScores()
             document.getElementById("thirdTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
             currentThird = currentTotal;
             currentThirdName = schoolNames[a];
+        }
+        
+        if(currentTotal > currentForth && schoolName == currentFifthName && clear == false && debug == true)
+        {
+            //console.log(currentTotal + " " + currentFirst);
+            document.getElementById("forthScore").innerHTML = "Beginner: " + schoolBeginner[schoolNames[a]] + " Intermediate: " + schoolIntermediate[schoolNames[a]] + " Advanced: " + schoolAdvanced[schoolNames[a]];
+            document.getElementById("forthTotal").innerHTML = "Total Score: " + schoolTotal[schoolNames[a]];
+            currentFirst = currentTotal;
+            document.getElementById("forth").style = "top: 150px;";
+            document.getElementById("fifth").style = "top: -150px;";
+            currentFifth = currentForth;
+            currentFifthName = currentForthName;
+            currentForth = currentTotal;
+            currentForthName = schoolNames[a];
+            clear = true;
         }
         
         if(currentTotal > currentForth && currentTotal < currentThird && clear == false)

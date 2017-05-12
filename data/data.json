@@ -86,7 +86,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 100
+        "Total": 600
     },
     
     "WBO": {
@@ -95,7 +95,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 400
+        "Total":0
     },
     
     "WFG": {
@@ -104,7 +104,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 300
+        "Total":300
     },
     
     "SPO": {
@@ -113,7 +113,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 500
+        "Total":40
     },
     
     "AEL": {
@@ -122,7 +122,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 0
+        "Total": 700
     },
     
     "CBN": {
@@ -131,7 +131,7 @@
         "Beginner": 0,
         "Intermediate": 0,
         "Advanced": 0,
-        "Total": 0
+        "Total": 20
     },
     
     "EPE": {
