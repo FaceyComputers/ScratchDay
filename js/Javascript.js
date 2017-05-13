@@ -125,8 +125,8 @@ function refreshScores()
                 //console.log(schoolName + nameDictionary[0]);
                 if(currentTotal > totalDictionary[b] && schoolName == nameDictionary[b + 1])
                 {
-                    document.getElementById(listDictionary[b]).style = "top: 150px;";
-                    document.getElementById(listDictionary[b + 1]).style = "top: -150px;";
+                    document.getElementById(listDictionary[b]).style = "top: 167px;";
+                    document.getElementById(listDictionary[b + 1]).style = "top: -167px;";
                     var backup = listDictionary[b];
                     listDictionary[b] = listDictionary[b + 1];
                     listDictionary[b + 1] = backup;
@@ -145,8 +145,8 @@ function refreshScores()
                 
                 if(currentTotal > totalDictionary[b] && schoolName == nameDictionary[b + 1])
                 {
-                    document.getElementById(listDictionary[b]).style = "top: 150px;";
-                    document.getElementById(listDictionary[b + 1]).style = "top: -150px;";
+                    document.getElementById(listDictionary[b]).style = "top: 167px;";
+                    document.getElementById(listDictionary[b + 1]).style = "top: -167px;";
                     var backup = listDictionary[b];
                     listDictionary[b] = listDictionary[b + 1];
                     listDictionary[b + 1] = backup;
@@ -172,6 +172,13 @@ function refreshScores()
     //document.getElementById("second").style = "top: -150px;";
 }
 }
+
+/*function manualAnimation(b, height)
+{
+    console.log("Declared with: " + height);
+    document.getElementById(listDictionary[b]).style = "top: " + String(height);
+    document.getElementById(listDictionary[b + 1]).style = "top: " + String(height);
+}*/
 
 $(setInterval(function () {
         $.getJSON("../testing/Score/data.json", function(result){
