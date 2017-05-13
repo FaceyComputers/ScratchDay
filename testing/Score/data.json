@@ -14,7 +14,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 4
+            "Total": 0
         },
         "FRH": {
             "name": "FRH",
@@ -22,7 +22,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 75,
-            "Total": 81
+            "Total": 0
         },
         "FSC": {
             "name": "FSC",
@@ -30,7 +30,7 @@
             "Beginner": 3,
             "Intermediate": 5,
             "Advanced": 0,
-            "Total": 11
+            "Total": 0
         },
         "LLR": {
             "name": "LLR",
@@ -38,7 +38,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 2
+            "Total": 0
         },
         "MUN": {
             "name": "MUN",
@@ -46,7 +46,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 1
+            "Total": 480
         },
         "PNE": {
             "name": "PNE",
@@ -54,7 +54,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 10
+            "Total": 490
         },
         "RHJ": {
             "name": "RHJ",
@@ -62,7 +62,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 0
+            "Total": 475
         },
         "SCE": {
             "name": "SCE",
@@ -70,7 +70,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 0
+            "Total": 104
         },
         "SCS": {
             "name": "SCS",
@@ -78,7 +78,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 0
+            "Total": 109
         },
         "WBO": {
             "name": "WBO",
@@ -86,7 +86,7 @@
             "Beginner": 3,
             "Intermediate": 5,
             "Advanced": 0,
-            "Total": 108
+            "Total": 0
         },
         "WFG": {
             "name": "WFG",
