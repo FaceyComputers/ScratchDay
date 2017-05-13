@@ -99,6 +99,19 @@ function changeTitle()
     time++;
 }
 
+function getStyle(oElm, strCssRule){
+    var strValue = "";
+    if(document.defaultView && document.defaultView.getComputedStyle){
+        strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+    }
+    else if(oElm.currentStyle){
+        strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1){
+            return p1.toUpperCase();
+        });
+        strValue = oElm.currentStyle[strCssRule];
+    }
+    return strValue;
+}
 
 function refreshScores()
 {
@@ -125,8 +138,15 @@ function refreshScores()
                 //console.log(schoolName + nameDictionary[0]);
                 if(currentTotal > totalDictionary[b] && schoolName == nameDictionary[b + 1])
                 {
-                    document.getElementById(listDictionary[b]).style = "top: 167px;";
-                    document.getElementById(listDictionary[b + 1]).style = "top: -167px;";
+                    var defaultText = "167px";
+                    var defaultText2 = "-167px";
+                    if(getStyle(document.getElementById(listDictionary[b]), "top") == "-167px")
+                    {
+                        defaultText = "0px";
+                        defaultText2 = "0px";
+                    }
+                    document.getElementById(listDictionary[b]).style = "top: " + defaultText;
+                    document.getElementById(listDictionary[b + 1]).style = "top: " + defaultText2;
                     var backup = listDictionary[b];
                     listDictionary[b] = listDictionary[b + 1];
                     listDictionary[b + 1] = backup;
@@ -145,8 +165,15 @@ function refreshScores()
                 
                 if(currentTotal > totalDictionary[b] && schoolName == nameDictionary[b + 1])
                 {
-                    document.getElementById(listDictionary[b]).style = "top: 167px;";
-                    document.getElementById(listDictionary[b + 1]).style = "top: -167px;";
+                    var defaultText = "167px";
+                    var defaultText2 = "-167px";
+                    if(getStyle(document.getElementById(listDictionary[b]), "top") == "-167px")
+                    {
+                        defaultText = "0px";
+                        defaultText2 = "0px";
+                    }
+                    document.getElementById(listDictionary[b]).style = "top: " + defaultText;
+                    document.getElementById(listDictionary[b + 1]).style = "top: " + defaultText2;
                     var backup = listDictionary[b];
                     listDictionary[b] = listDictionary[b + 1];
                     listDictionary[b + 1] = backup;
