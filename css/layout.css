@@ -21,27 +21,27 @@
     transition: all 2s;
 }
 
-#first {
+#d0 {
     top: 0px;
     position: relative;
 }
 
-#second {
+#d1 {
     top: 0px;
     position: relative;
 }
 
-#third {
+#d2 {
     top: 0px;
     position: relative;
 }
 
-#forth {
+#d3 {
     top: 0px;
     position: relative;
 }
 
-#fifth {
+#d4 {
     top: 0px;
     position: relative;
 }
@@ -49,6 +49,7 @@
 .Leaderboard > .School {
     margin: -10px -10px -10px -10px;
     padding: 3px;
+    font-size: 40px;
 }
 
 .Leaderboard > .Score {
@@ -61,6 +62,7 @@
 
 .Leaderboard > .Total {
     color: #F9A937;
+    text-shadow: 1px 2px #000000;
     display: inline-block;
     margin: -10px -10px -10px 30px;
 }
