@@ -1,14 +1,50 @@
 <html>
 <head>
 <title>Add Points</title>
+<link href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i' rel='stylesheet' type='text/css'>
 <style>
-	span {
-		color: #FF0000;
+	body {
+		background: #25AFF4;
+		color: #FFFFFF;
+		text-align: center;
+		font-family: 'Product Sans', Arial, sans-serif;
+		font-size: 25px;
+	}
+	h1 {
+		font-size: 35px;
+	}
+	input[type="radio"]{
+		display: none;
+	}
+	label {
+		margin: 0 auto;
+		padding: 60px 120px;
+		background: #FFCA7D;
+		display: block;
+		font-size: 45px;
+	}
+	.radio {
+		margin: auto;
+	}
+	input[type="radio"]:checked + label{
+		background: #F9A937;
+	}
+	input[type="button"]{
+		padding: 25px 40px;
+		border: none;
+		font-size: 30px;
+		background: #284BF9;
+		color: #FFFFFF;
+	}
+	select{
+		padding: 10px;
+		font-size: 20px;
+		border: none;
 	}
 </style>
 </head>
 <body>
-	<p>Select a school:<span id="schoolSelect"></span></p>
+	<h1>Select a school:<span id="schoolSelect"></span></h1>
 	<select id="school" onclick="clearErrors()">
 		<option value="">Select School:</option>
 		<option value="CLB">Clover Bar Jr. High</option>
@@ -28,13 +64,16 @@
 		<option value="WBO">Westboro Elementary</option>
 		<option value="WFG">Win Ferguson Elementary</option>
 	</select>
-	<p>Select challenge difficulty:<span id="pointSelect"></span></p>
+	<h1>Select challenge difficulty:<span id="pointSelect"></span></h1>
 	<div onclick="clearErrors()">
-	<input type="radio" name="points" value="3">Beginner<br>
-	<input type="radio" name="points" value="5">Intermediate<br>
-	<input type="radio" name="points" value="15">Advanced<br>
+	<input type="radio" name="points" id="3" value="3">
+	<label for="3"><span class="radio">Beginner</span></label><br>
+	<input type="radio" name="points" id="5" value="5">
+	<label for="5"><span class="radio">Intermediate</span></label><br>
+	<input type="radio" name="points" id="15" value="15">
+	<label for="15"><span class="radio">Advanced</span></label><br>
 	</div>
-	<input type="button" name="submit" value="Submit"onclick="sendData()">
+	<input type="button" name="submit" value="Submit" onclick="sendData()">
 	<p id="demo"></p>
 	<script>
 	function clearErrors(){
@@ -56,6 +95,7 @@
 			xhttp.open("POST", "score.php", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.send("school=" + school.value + "&points=" + point);
+			console.log("school=" + school.value + "&points=" + point);
 			points.checked = false;
 			school.value = "";
 		} else {
