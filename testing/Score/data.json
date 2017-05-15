@@ -21,14 +21,14 @@
             "fullName": "F.R. Haythorne Junior High",
             "Beginner": 0,
             "Intermediate": 0,
-            "Advanced": 75,
+            "Advanced": 0,
             "Total": 0
         },
         "FSC": {
             "name": "FSC",
             "fullName": "Fort Saskatchewan Christian",
-            "Beginner": 3,
-            "Intermediate": 5,
+            "Beginner": 0,
+            "Intermediate": 0,
             "Advanced": 0,
             "Total": 0
         },
@@ -54,7 +54,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 32
+            "Total": 0
         },
         "RHJ": {
             "name": "RHJ",
@@ -62,7 +62,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 31
+            "Total": 0
         },
         "SCE": {
             "name": "SCE",
@@ -70,7 +70,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 33
+            "Total": 0
         },
         "SCS": {
             "name": "SCS",
@@ -83,8 +83,8 @@
         "WBO": {
             "name": "WBO",
             "fullName": "Westboro Elementary",
-            "Beginner": 3,
-            "Intermediate": 5,
+            "Beginner": 0,
+            "Intermediate": 0,
             "Advanced": 0,
             "Total": 0
         },
