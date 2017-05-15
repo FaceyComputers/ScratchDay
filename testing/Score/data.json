@@ -21,14 +21,14 @@
             "fullName": "F.R. Haythorne Junior High",
             "Beginner": 0,
             "Intermediate": 0,
-            "Advanced": 75,
+            "Advanced": 0,
             "Total": 0
         },
         "FSC": {
             "name": "FSC",
             "fullName": "Fort Saskatchewan Christian",
-            "Beginner": 3,
-            "Intermediate": 5,
+            "Beginner": 0,
+            "Intermediate": 0,
             "Advanced": 0,
             "Total": 0
         },
@@ -83,10 +83,10 @@
         "WBO": {
             "name": "WBO",
             "fullName": "Westboro Elementary",
-            "Beginner": 3,
-            "Intermediate": 5,
+            "Beginner": 0,
+            "Intermediate": 0,
             "Advanced": 0,
-            "Total": 106
+            "Total": 0
         },
         "WFG": {
             "name": "WFG",
@@ -94,7 +94,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 2001
+            "Total": 0
         },
         "SPO": {
             "name": "SPO",
@@ -102,7 +102,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 200
+            "Total": 0
         },
         "AEL": {
             "name": "AEL",
@@ -110,7 +110,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 105
+            "Total": 0
         },
         "CBN": {
             "name": "CBN",
@@ -118,11 +118,11 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 50
+            "Total": 0
         },
         "EPE": {
             "name": "EPE",
-            "fullName": "Ecole Parc El\u00e9mentaire",
+            "fullName": "Ecole Parc Elementaire",
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
