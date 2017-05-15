@@ -6,13 +6,31 @@ var debug = true;
 var totalBeginnerScore = 0;
 var totalIntermediateScore = 0;
 var totalAdvancedScore = 0;
-var y_axis = 147;
+
+/*var listDictionary = {first: "first",
+                     second: "second",
+                     third: "third",
+                     forth: "forth",
+                     fifth: "fifth"};
+
+var nameDictionary = {first: "",
+                     second: "",
+                     third: "",
+                     forth: "",
+                     fifth: ""}*/
 
 var listDictionary = ["d0", "d1", "d2", "d3", "d4"];
 
 var nameDictionary = ["", "", "", "", ""];
 
 var totalDictionary = [0, 0, 0, 0, 0];
+
+var top1 = 0;
+var top2 = 0;
+var top3 = 0;
+var top4 = 0;
+var top5 = 0;
+
 
 var schoolNames = ["CLB", "FSE", "FRH", "FSC", "LLR", "MUN", "PNE", "RHJ", "SCE", "SCS", "WBO", "WFG", "SPO", "AEL", "CBN", "EPE"];
 var schoolFullNames = {};
@@ -81,6 +99,20 @@ function changeTitle()
     time++;
 }
 
+function getStyle(oElm, strCssRule){
+    var strValue = "";
+    if(document.defaultView && document.defaultView.getComputedStyle){
+        strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+    }
+    else if(oElm.currentStyle){
+        strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1){
+            return p1.toUpperCase();
+        });
+        strValue = oElm.currentStyle[strCssRule];
+    }
+    return strValue;
+}
+
 function refreshScores()
 {
     var total = 0;
@@ -111,31 +143,59 @@ function refreshScores()
             if(b == 0)
             {
                 //console.log(schoolName + nameDictionary[0]);
+                if(currentTotal > totalDictionary[b] && schoolName == nameDictionary[b + 1])
+                {
+                    var defaultText = "167px";
+                    var defaultText2 = "-167px";
+                    if(getStyle(document.getElementById(listDictionary[b]), "top") == "-167px")
+                    {
+                        defaultText = "0px";
+                        defaultText2 = "0px";
+                    }
+                    document.getElementById(listDictionary[b]).style = "top: " + defaultText;
+                    document.getElementById(listDictionary[b + 1]).style = "top: " + defaultText2;
+                    var backup = listDictionary[b];
+                    listDictionary[b] = listDictionary[b + 1];
+                    listDictionary[b + 1] = backup;
+                    console.log(listDictionary[b] + " " + listDictionary[b + 1]);
+                }
                 
                 if(currentTotal > totalDictionary[b])
                 {
-                    fadeout(b);
+                    document.getElementById(String(listDictionary[b])).getElementsByClassName("School")[0].innerHTML = schoolFullNames[schoolName];
+                    document.getElementById(String(listDictionary[b])).getElementsByClassName("Score")[0].innerHTML = "Beginner: " + schoolBeginner[schoolName] + " Intermediate: " + schoolIntermediate[schoolName] + " Advanced: " + schoolAdvanced[schoolName];
+                    document.getElementById(String(listDictionary[b])).getElementsByClassName("Total")[0].innerHTML = "Total Score: " + schoolTotal[schoolName];
                     nameDictionary[b] = schoolName;
                     totalDictionary[b] = currentTotal;
-                    setTimeout(animation, 1000);
                 }
             }else{
                 
-                if(currentTotal == totalDictionary[b - 1] && nameDictionary[b - 1] != schoolName && nameDictionary[b - 2] != schoolName && nameDictionary[b - 3] != schoolName && nameDictionary[b + 1] != schoolName && nameDictionary[b + 2] != schoolName)
+                if(currentTotal > totalDictionary[b] && schoolName == nameDictionary[b + 1])
                 {
-                    console.log("test2");
-                    fadeout(b);
+                    var defaultText = "167px";
+                    var defaultText2 = "-167px";
+                    if(getStyle(document.getElementById(listDictionary[b]), "top") == "-167px")
+                    {
+                        defaultText = "0px";
+                        defaultText2 = "0px";
+                    }
+                    document.getElementById(listDictionary[b]).style = "top: " + defaultText;
+                    document.getElementById(listDictionary[b + 1]).style = "top: " + defaultText2;
+                    var backup = listDictionary[b];
+                    listDictionary[b] = listDictionary[b + 1];
+                    listDictionary[b + 1] = backup;
+                    console.log(listDictionary[b] + " " + listDictionary[b + 1]);
+                }
+                
+                if(currentTotal > totalDictionary[b] && currentTotal < totalDictionary[b - 1])
+                {
+                    document.getElementById(String(listDictionary[b])).getElementsByClassName("School")[0].innerHTML = schoolFullNames[schoolName];
+                    document.getElementById(String(listDictionary[b])).getElementsByClassName("Score")[0].innerHTML = "Beginner: " + schoolBeginner[schoolName] + " Intermediate: " + schoolIntermediate[schoolName] + " Advanced: " + schoolAdvanced[schoolName];
+                    document.getElementById(String(listDictionary[b])).getElementsByClassName("Total")[0].innerHTML = "Total Score: " + schoolTotal[schoolName];
                     nameDictionary[b] = schoolName;
                     totalDictionary[b] = currentTotal;
-                    setTimeout(animation, 1000);
-                }else if(currentTotal > totalDictionary[b] && currentTotal < totalDictionary[b - 1] && schoolName != nameDictionary[b - 1])
-                {
-                    console.log("test");
-                    fadeout(b);
-                    nameDictionary[b] = schoolName;
-                    totalDictionary[b] = currentTotal;
-                    setTimeout(animation, 1000);
-                }  
+                }
+            }
         }
            
     totalScore = total;
@@ -146,51 +206,13 @@ function refreshScores()
     //document.getElementById("second").style = "top: -150px;";
 }
 }
-}
 
-function fadeout(b)
+/*function manualAnimation(b, height)
 {
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style = "opacity: 0;"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style = "opacity: 0;"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style = "opacity: 0;"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.transition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.WebkitTransition = "all 1s";
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.MozTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.OTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.transition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.WebkitTransition = "all 1s";
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.MozTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.OTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.transition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.WebkitTransition = "all 1s";
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.MozTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.OTransition = "all 1s";     
-}
-
-function animation(b)
-{
-    for(var b = 0; b < listDictionary.length; b++)
-    {
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style = "opacity: 1;"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style = "opacity: 1;"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style = "opacity: 1;"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.transition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.WebkitTransition = "all 1s";
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.MozTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.OTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.transition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.WebkitTransition = "all 1s";
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.MozTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.OTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.transition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.WebkitTransition = "all 1s";
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.MozTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.OTransition = "all 1s";   
-    document.getElementById(String(listDictionary[b])).getElementsByClassName("School")[0].innerHTML = schoolFullNames[nameDictionary[b]];
-    document.getElementById(String(listDictionary[b])).getElementsByClassName("Score")[0].innerHTML = "Beginner: " + schoolBeginner[nameDictionary[b]] + " Intermediate: " + schoolIntermediate[nameDictionary[b]] + " Advanced: " + schoolAdvanced[nameDictionary[b]];
-    document.getElementById(String(listDictionary[b])).getElementsByClassName("Total")[0].innerHTML = "Total Score: " + schoolTotal[nameDictionary[b]];    
-    }
-}
+    console.log("Declared with: " + height);
+    document.getElementById(listDictionary[b]).style = "top: " + String(height);
+    document.getElementById(listDictionary[b + 1]).style = "top: " + String(height);
+}*/
 
 $(setInterval(function () {
         $.getJSON("../testing/Score/data.json", function(result){
