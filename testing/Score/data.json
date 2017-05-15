@@ -54,7 +54,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 32
+            "Total": 0
         },
         "RHJ": {
             "name": "RHJ",
@@ -62,7 +62,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 31
+            "Total": 0
         },
         "SCE": {
             "name": "SCE",
@@ -70,7 +70,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 33
+            "Total": 0
         },
         "SCS": {
             "name": "SCS",
@@ -86,7 +86,7 @@
             "Beginner": 3,
             "Intermediate": 5,
             "Advanced": 0,
-            "Total": 0
+            "Total": 106
         },
         "WFG": {
             "name": "WFG",
@@ -94,7 +94,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 0
+            "Total": 2001
         },
         "SPO": {
             "name": "SPO",
@@ -102,7 +102,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 0
+            "Total": 200
         },
         "AEL": {
             "name": "AEL",
@@ -110,7 +110,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 0
+            "Total": 105
         },
         "CBN": {
             "name": "CBN",
@@ -118,7 +118,7 @@
             "Beginner": 0,
             "Intermediate": 0,
             "Advanced": 0,
-            "Total": 0
+            "Total": 50
         },
         "EPE": {
             "name": "EPE",
