@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>Add Points</title>
@@ -11,40 +12,45 @@
 		font-size: 25px;
 	}
 	h1 {
+		font-size: 45px;
+	}
+	h2 {
 		font-size: 35px;
+		margin-top: 25px;
 	}
 	input[type="radio"]{
 		display: none;
 	}
 	label {
-		margin: 0 auto;
-		padding: 60px 120px;
-		background: #FFCA7D;
+		margin: -7px 10px;
+		padding: 40px 40px;
+		background: #F9A937;
+		font-size: 55px;
 		display: block;
-		font-size: 45px;
 	}
 	.radio {
 		margin: auto;
 	}
-	input[type="radio"]:checked + label{
-		background: #F9A937;
-	}
 	input[type="button"]{
 		padding: 25px 40px;
 		border: none;
-		font-size: 30px;
+		font-size: 35px;
 		background: #284BF9;
 		color: #FFFFFF;
 	}
 	select{
 		padding: 10px;
-		font-size: 20px;
+		font-size: 30px;
 		border: none;
+	}
+	.error {
+		color: #FF0000;
 	}
 </style>
 </head>
 <body>
-	<h1>Select a school:<span id="schoolSelect"></span></h1>
+	<h1>EIPS Scratch Day</h1>
+	<h2>Select a school:<span class="error" id="schoolSelect"></span></h2>
 	<select id="school" onclick="clearErrors()">
 		<option value="">Select School:</option>
 		<option value="CLB">Clover Bar Jr. High</option>
@@ -64,18 +70,26 @@
 		<option value="WBO">Westboro Elementary</option>
 		<option value="WFG">Win Ferguson Elementary</option>
 	</select>
-	<h1>Select challenge difficulty:<span id="pointSelect"></span></h1>
+	<h2>Select challenge difficulty:<span class="error" id="pointSelect"></span></h2>
 	<div onclick="clearErrors()">
-	<input type="radio" name="points" id="3" value="3">
+	<input type="radio" name="points" id="3" value="3" onclick="grayOut()">
 	<label for="3"><span class="radio">Beginner</span></label><br>
-	<input type="radio" name="points" id="5" value="5">
+	<input type="radio" name="points" id="5" value="5" onclick="grayOut()">
 	<label for="5"><span class="radio">Intermediate</span></label><br>
-	<input type="radio" name="points" id="15" value="15">
+	<input type="radio" name="points" id="15" value="15" onclick="grayOut()">
 	<label for="15"><span class="radio">Advanced</span></label><br>
 	</div>
 	<input type="button" name="submit" value="Submit" onclick="sendData()">
 	<p id="demo"></p>
+	
 	<script>
+	function grayOut(){
+		var unchecked = document.querySelectorAll('input[name="points"]:not(:checked)+label');
+		unchecked[0].style.background = "#FFCA7D";
+		unchecked[1].style.background = "#FFCA7D";
+		document.querySelector('input[name="points"]:checked+label').style.background = "#F9A937";
+	}
+	
 	function clearErrors(){
 		document.getElementById("schoolSelect").innerHTML = "";
 		document.getElementById("pointSelect").innerHTML = "";
@@ -94,11 +108,13 @@
 			var point = points.value;
 			xhttp.open("POST", "score.php", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xhttp.send("school=" + school.value + "&points=" + point);
-			console.log("school=" + school.value + "&points=" + point);
+			xhttp.send("getData=false&school=" + school.value + "&points=" + point);
+			var unchecked = document.querySelectorAll('input[type="radio"]:not(:checked) + label');
+			unchecked[0].style.background = "";
+			unchecked[1].style.background = "";
 			points.checked = false;
 			school.value = "";
-		} else {
+		} else {	
 			if (points === null){
 				document.getElementById("pointSelect").innerHTML = " *Required";
 			}

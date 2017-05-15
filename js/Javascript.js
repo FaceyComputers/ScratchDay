@@ -101,6 +101,13 @@ function refreshScores()
         
         for(var b = 0; b < listDictionary.length; b++)
         {
+            for(var d = 0; d < listDictionary.length; d++)
+            {
+            if(nameDictionary[d] == nameDictionary[d - 1])
+            {
+                console.log("test");
+            }
+            }
             if(b == 0)
             {
                 //console.log(schoolName + nameDictionary[0]);
