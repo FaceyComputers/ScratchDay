@@ -116,14 +116,12 @@ function refreshScores()
                 
                 if(currentTotal == totalDictionary[b - 1] && nameDictionary[b - 1] != schoolName && nameDictionary[b - 2] != schoolName && nameDictionary[b - 3] != schoolName && nameDictionary[b + 1] != schoolName && nameDictionary[b + 2] != schoolName)
                 {
-                    console.log("test2");
                     fadeout(b);
                     nameDictionary[b] = schoolName;
                     totalDictionary[b] = currentTotal;
                     setTimeout(animation, 1000);
                 }else if(currentTotal > totalDictionary[b] && currentTotal < totalDictionary[b - 1] && schoolName != nameDictionary[b - 1])
                 {
-                    console.log("test");
                     fadeout(b);
                     nameDictionary[b] = schoolName;
                     totalDictionary[b] = currentTotal;
