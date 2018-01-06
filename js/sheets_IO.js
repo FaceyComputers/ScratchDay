@@ -57,7 +57,7 @@ function writeCellValues(sheetID, range, majorDimension, body, callback) {
 function handleClientLoad(signInUpdateCallback) {
 	gapi.load('client:auth2', function(){
 		var API_KEY = '';
-		var CLIENT_ID = '666423085846-phon0564jgucru5fnif0qpgr6s0hslj6.apps.googleusercontent.com';
+		var CLIENT_ID = '';
 		var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 	
 		gapi.client.init({
