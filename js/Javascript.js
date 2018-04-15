@@ -40,10 +40,9 @@ function addSchoolBlock()
     for(var a = 0; a < schoolNames.length; a++)
     {
         var div = document.createElement("div");
-        div.style.width = "100px";
+        //div.style.width = "px";
+        div.style.top = "10px";
         div.style.height = (a + 100) + "px";
-        div.style.background = "red";
-        div.style.color = "white";
         div.innerHTML = "Hello";
         document.getElementById("Main").appendChild(div);
     }
@@ -69,7 +68,6 @@ function changeTitle()
     }
     time++;
 }
-
 
 $(setInterval(function () {
         $.getJSON("../testing/Score/data.json", function(result){
