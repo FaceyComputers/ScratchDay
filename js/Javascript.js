@@ -44,7 +44,7 @@ function fadeOut(id)
 
 function changeTitle()
 {  
-    if(time == 0)
+    if(time == 1)
     {  
         fadeIn("Main_title");
         document.getElementById("Main_title").innerHTML = text[index];
@@ -60,7 +60,7 @@ function changeTitle()
                 time = 0;
         index++;
     }
-    time+=2;
+    time++;
 }
 
 
