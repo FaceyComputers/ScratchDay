@@ -21,8 +21,7 @@ var schoolBeginner = {};
 var schoolIntermediate = {};
 var schoolAdvanced = {};
 var schoolTotal = {};
-//var text = ["EIPS Scratch Day", "Total Score: " + totalScore, "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore];
-var text = ["hi", "oh"];
+var text = ["EIPS Scratch Day", "Total Score: " + totalScore, "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore];
 
 function fadeIn(id)
 {
@@ -49,16 +48,15 @@ function changeTitle()
         fadeIn("Main_title");
         document.getElementById("Main_title").innerHTML = text[index];
     }
-    if(time > 10)
+    if(time >= 10)
     {
         fadeOut("Main_title");
-        
+        time = 0;
+        index++;
         if(index >= text.length)
         {
             index = 0;
         }
-                time = 0;
-        index++;
     }
     time++;
 }
@@ -72,7 +70,7 @@ $(setInterval(function () {
                 schoolIntermediate[schools.name] = schools.Intermediate;
                 schoolAdvanced[schools.name] = schools.Advanced;
                 schoolTotal[schools.name] = schools.Total;
-                refreshScores();
+                //refreshScores();
             });
     });
 }, 100));
