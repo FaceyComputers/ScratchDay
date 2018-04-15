@@ -9,12 +9,6 @@ var totalIntermediateScore = 0;
 var totalAdvancedScore = 0;
 var y_axis = 147;
 
-var listDictionary = ["d0", "d1", "d2", "d3", "d4"];
-
-var nameDictionary = ["", "", "", "", ""];
-
-var totalDictionary = [0, 0, 0, 0, 0];
-
 var schoolNames = ["CLB", "FSE", "FRH", "FSC", "LLR", "MUN", "PNE", "RHJ", "SCE", "SCS", "WBO", "WFG", "SPO", "AEL", "CBN", "EPE"];
 var schoolFullNames = {};
 var schoolBeginner = {};
@@ -41,12 +35,27 @@ function fadeOut(id)
     document.getElementById(id).style.OTransition = "all 1s"; 
 }
 
+function addSchoolBlock()
+{
+    for(var a = 0; a < schoolNames.length; a++)
+    {
+        var div = document.createElement("div");
+        div.style.width = "100px";
+        div.style.height = (a + 100) + "px";
+        div.style.background = "red";
+        div.style.color = "white";
+        div.innerHTML = "Hello";
+        document.getElementById("Main").appendChild(div);
+    }
+}
+
 function changeTitle()
 {  
     if(time == 1)
     {  
         fadeIn("Main_title");
         document.getElementById("Main_title").innerHTML = text[index];
+        addSchoolBlock();
     }
     if(time >= 10)
     {
