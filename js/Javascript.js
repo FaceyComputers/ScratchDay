@@ -1,6 +1,7 @@
 setInterval(changeTitle, 800);
 
 var time = 0;
+var index = 0;
 var totalScore = 0;
 var debug = true;
 var totalBeginnerScore = 0;
@@ -20,168 +21,48 @@ var schoolBeginner = {};
 var schoolIntermediate = {};
 var schoolAdvanced = {};
 var schoolTotal = {};
+//var text = ["EIPS Scratch Day", "Total Score: " + totalScore, "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore];
+var text = ["hi", "oh"];
+
+function fadeIn(id)
+{
+    document.getElementById(id).style = "opacity: 1;"; 
+    document.getElementById(id).style.transition = "all 1s"; 
+    document.getElementById(id).style.WebkitTransition = "all 1s";
+    document.getElementById(id).style.MozTransition = "all 1s"; 
+    document.getElementById(id).style.OTransition = "all 1s"; 
+}
+
+function fadeOut(id)
+{
+    document.getElementById(id).style = "opacity: 0;"; 
+    document.getElementById(id).style.transition = "all 1s"; 
+    document.getElementById(id).style.WebkitTransition = "all 1s";
+    document.getElementById(id).style.MozTransition = "all 1s"; 
+    document.getElementById(id).style.OTransition = "all 1s"; 
+}
 
 function changeTitle()
-{
-    if(time < 10)
-    {
-    document.getElementById("Main_title").style = "opacity: 1;"; 
-    document.getElementById("Main_title").style.transition = "all 1s"; 
-    document.getElementById("Main_title").style.WebkitTransition = "all 1s";
-    document.getElementById("Main_title").style.MozTransition = "all 1s"; 
-    document.getElementById("Main_title").style.OTransition = "all 1s"; 
-    document.getElementById("Main_title").innerHTML = "EIPS Scratch Day";
-    }
-    if(time > 9)
-    {
-    document.getElementById("Main_title").style = "opacity: 0;"; 
-    document.getElementById("Main_title").style.transition = "all 1s"; 
-    document.getElementById("Main_title").style.WebkitTransition = "all 1s";
-    document.getElementById("Main_title").style.MozTransition = "all 1s"; 
-    document.getElementById("Main_title").style.OTransition = "all 1s"; 
+{  
+    if(time == 0)
+    {  
+        fadeIn("Main_title");
+        document.getElementById("Main_title").innerHTML = text[index];
     }
     if(time > 10)
     {
-    document.getElementById("Main_title").style = "opacity: 1;"; 
-    document.getElementById("Main_title").style.transition = "all 1s"; 
-    document.getElementById("Main_title").style.WebkitTransition = "all 1s";
-    document.getElementById("Main_title").style.MozTransition = "all 1s"; 
-    document.getElementById("Main_title").style.OTransition = "all 1s"; 
-    document.getElementById("Main_title").innerHTML = "Total Score: " + totalScore;  
-    }
-    if(time > 17)
-    {
-    document.getElementById("Main_title").style = "opacity: 0;"; 
-    document.getElementById("Main_title").style.transition = "all 1s"; 
-    document.getElementById("Main_title").style.WebkitTransition = "all 1s";
-    document.getElementById("Main_title").style.MozTransition = "all 1s"; 
-    document.getElementById("Main_title").style.OTransition = "all 1s";  
-    }
-    if(time > 18)
-    {
-    document.getElementById("Main_title").style = "opacity: 1;"; 
-    document.getElementById("Main_title").style.transition = "all 1s"; 
-    document.getElementById("Main_title").style.WebkitTransition = "all 1s";
-    document.getElementById("Main_title").style.MozTransition = "all 1s"; 
-    document.getElementById("Main_title").style.OTransition = "all 1s"; 
-    document.getElementById("Main_title").innerHTML = "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore;  
-    }
-    if(time > 24)
-    {
-    document.getElementById("Main_title").style = "opacity: 0;"; 
-    document.getElementById("Main_title").style.transition = "all 1s"; 
-    document.getElementById("Main_title").style.WebkitTransition = "all 1s";
-    document.getElementById("Main_title").style.MozTransition = "all 1s"; 
-    document.getElementById("Main_title").style.OTransition = "all 1s";  
-    }
-    if(time >= 25)
-    {
-        time = 0;
-    }
-    time++;
-}
-
-function refreshScores()
-{
-    var total = 0;
-    var beginnerTotal = 0;
-    var intermediateTotal = 0;
-    var advancedTotal = 0;
-    
-    for(var a = 0; a < schoolNames.length; a++)
-    {
-        var currentTotal = schoolTotal[schoolNames[a]];
-        var schoolName = schoolNames[a];
-        var clear = false;
-        total = total + currentTotal;
-        beginnerTotal = beginnerTotal + schoolBeginner[schoolNames[a]];
-        intermediateTotal = intermediateTotal + schoolIntermediate[schoolNames[a]];
-        advancedTotal = advancedTotal + schoolAdvanced[schoolNames[a]];
-        //console.log(schoolTotal[schoolNames[a]]);
+        fadeOut("Main_title");
         
-        for(var b = 0; b < listDictionary.length; b++)
+        if(index >= text.length)
         {
-            if(b == 0)
-            {
-                //console.log(schoolName + nameDictionary[0]);
-                
-                if(currentTotal > totalDictionary[b])
-                {
-                    fadeout(b);
-                    nameDictionary[b] = schoolName;
-                    totalDictionary[b] = currentTotal;
-                    setTimeout(animation, 1000);
-                }
-            }else{
-                
-                if(currentTotal == totalDictionary[b - 1] && nameDictionary[b - 1] != schoolName && nameDictionary[b - 2] != schoolName && nameDictionary[b - 3] != schoolName && nameDictionary[b + 1] != schoolName && nameDictionary[b + 2] != schoolName)
-                {
-                    fadeout(b);
-                    nameDictionary[b] = schoolName;
-                    totalDictionary[b] = currentTotal;
-                    setTimeout(animation, 1000);
-                }else if(currentTotal > totalDictionary[b] && currentTotal < totalDictionary[b - 1] && schoolName != nameDictionary[b - 1])
-                {
-                    fadeout(b);
-                    nameDictionary[b] = schoolName;
-                    totalDictionary[b] = currentTotal;
-                    setTimeout(animation, 1000);
-                }  
+            index = 0;
         }
-           
-    totalScore = total;
-	totalBeginnerScore = beginnerTotal;
-	totalIntermediateScore = intermediateTotal;
-	totalAdvancedScore = advancedTotal;
-    //document.getElementById("first").style = "top: 150px;";
-    //document.getElementById("second").style = "top: -150px;";
-}
-}
-}
-
-function fadeout(b)
-{
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style = "opacity: 0;"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style = "opacity: 0;"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style = "opacity: 0;"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.transition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.WebkitTransition = "all 1s";
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.MozTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.OTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.transition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.WebkitTransition = "all 1s";
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.MozTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.OTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.transition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.WebkitTransition = "all 1s";
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.MozTransition = "all 1s"; 
-                    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.OTransition = "all 1s";     
-}
-
-function animation(b)
-{
-    for(var b = 0; b < listDictionary.length; b++)
-    {
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style = "opacity: 1;"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style = "opacity: 1;"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style = "opacity: 1;"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.transition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.WebkitTransition = "all 1s";
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.MozTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("School")[0].style.OTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.transition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.WebkitTransition = "all 1s";
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.MozTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Total")[0].style.OTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.transition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.WebkitTransition = "all 1s";
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.MozTransition = "all 1s"; 
-    document.getElementById(listDictionary[b]).getElementsByClassName("Score")[0].style.OTransition = "all 1s";   
-    document.getElementById(String(listDictionary[b])).getElementsByClassName("School")[0].innerHTML = schoolFullNames[nameDictionary[b]];
-    document.getElementById(String(listDictionary[b])).getElementsByClassName("Score")[0].innerHTML = "Beginner: " + schoolBeginner[nameDictionary[b]] + " Intermediate: " + schoolIntermediate[nameDictionary[b]] + " Advanced: " + schoolAdvanced[nameDictionary[b]];
-    document.getElementById(String(listDictionary[b])).getElementsByClassName("Total")[0].innerHTML = "Total Score: " + schoolTotal[nameDictionary[b]];    
+                time = 0;
+        index++;
     }
+    time+=2;
 }
+
 
 $(setInterval(function () {
         $.getJSON("../testing/Score/data.json", function(result){
