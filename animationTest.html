@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Animation test</title>
+	<style>
+		div {
+			background-color:#FF0000;
+			width: 400px;
+			height: 100px;
+			position: absolute;
+			top: 0px;
+		}
+		p {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: 0;
+			transform:translate(-50%,-50%);
+		}
+	</style>
+</head>
+<body>
+	<script>
+		var test = [];
+		function School(schoolName){
+			this.schoolName = schoolName;
+			this.score = 0;
+			this.position = 0;
+
+			this.moveCard = function(){
+				this.position += 1; 
+				var card = document.getElementById(schoolName);
+				card.style.top = position + "px";
+				helper(this);
+			}
+		}
+		
+		function helper(card){
+			stopID = window.requestAnimationFrame(card.moveCard);
+		}
+		var schools = ["BFH"]//,"WHF","FHR","SAL","CLB"];
+		var n = 0;
+		
+		function createBoardCards(cardList){
+			var element = document.getElementsByTagName("body")[0];
+			for (var i = 0; i < schools.length; i++){
+				test.push(new School(schools[i]));
+				var division = document.createElement("div")
+				division.id = schools[i];
+				var para = document.createElement("p");
+				var node = document.createTextNode(schools[i]);
+				para.appendChild(node);
+				division.appendChild(para);
+				element.appendChild(division);
+			}
+		}
+		createBoardCards(schools);
+		var stopID = window.requestAnimationFrame(test[0].moveCard);
+	</script>
+<body>
+</html>
