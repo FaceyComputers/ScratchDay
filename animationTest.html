@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8"/>
 	<title>Animation test</title>
 	<style>
 		div {
@@ -8,7 +9,6 @@
 			width: 400px;
 			height: 100px;
 			position: absolute;
-			top: 0px;
 		}
 		p {
 			position: absolute;
@@ -21,41 +21,50 @@
 </head>
 <body>
 	<script>
-		var test = [];
-		function School(schoolName){
-			this.schoolName = schoolName;
+		var board = [];
+		var moveNums = [500,0,0,0,0];
+		function School(schoolName, yPosition){
+			this.name = schoolName;
 			this.score = 0;
 			this.position = 0;
-
-			this.moveCard = function(){
-				this.position += 1; 
-				var card = document.getElementById(schoolName);
-				card.style.top = position + "px";
-				helper(this);
+			this.y = yPosition;
+			this.velocity = 0;
+			this.move = function(endPosition){
+				this.y += 2*Math.sign(endPosition - this.y);
+				//console.log(this.y);
+				document.getElementById(this.name).style.top = this.y + "px";
 			}
 		}
 		
-		function helper(card){
-			stopID = window.requestAnimationFrame(card.moveCard);
+		var schools = ["BFH","WHF","FRH","SAL","CLB"];
+		
+		function sortTiles(){
+			
 		}
-		var schools = ["BFH"]//,"WHF","FHR","SAL","CLB"];
-		var n = 0;
+		
+		function moveTiles(){
+			for (var i = 0; i < board.length; i++){
+				board[i].move(moveNums[i]);
+			}
+			window.requestAnimationFrame(moveTiles);
+		}
 		
 		function createBoardCards(cardList){
-			var element = document.getElementsByTagName("body")[0];
+			var body = document.getElementsByTagName("body")[0];
 			for (var i = 0; i < schools.length; i++){
-				test.push(new School(schools[i]));
-				var division = document.createElement("div")
-				division.id = schools[i];
-				var para = document.createElement("p");
+				board.push(new School(schools[i], 110*i));
+				var divElement = document.createElement("div")
+				divElement.id = schools[i];
+				divElement.style.top = (110*i)+"px";
+				var pElement = document.createElement("p");
 				var node = document.createTextNode(schools[i]);
-				para.appendChild(node);
-				division.appendChild(para);
-				element.appendChild(division);
+				pElement.appendChild(node);
+				divElement.appendChild(pElement);
+				body.appendChild(divElement);
 			}
 		}
 		createBoardCards(schools);
-		var stopID = window.requestAnimationFrame(test[0].moveCard);
+		window.requestAnimationFrame(moveTiles);
 	</script>
 <body>
 </html>
