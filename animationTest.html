@@ -31,20 +31,21 @@
 			this.velocity = 0;
 			this.move = function(endPosition){
 				this.y += 2*Math.sign(endPosition - this.y);
-				//console.log(this.y);
 				document.getElementById(this.name).style.top = this.y + "px";
 			}
+				
 		}
 		
 		var schools = ["BFH","WHF","FRH","SAL","CLB"];
 		
-		function sortTiles(){
-			
+		function sortTiles(tileA, tileB){
+			return tileB.score - tileA.score;
 		}
 		
 		function moveTiles(){
+			board = board.sort(sortTiles);
 			for (var i = 0; i < board.length; i++){
-				board[i].move(moveNums[i]);
+				board[i].move(i*110);
 			}
 			window.requestAnimationFrame(moveTiles);
 		}
