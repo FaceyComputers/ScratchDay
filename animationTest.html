@@ -22,21 +22,44 @@
 <body>
 	<script>
 		var board = [];
-		var moveNums = [500,0,0,0,0];
-		function School(schoolName, yPosition){
+		var MAX_VELOCITY = 5;
+		function School(schoolName, yPosition, position){
 			this.name = schoolName;
 			this.score = 0;
-			this.position = 0;
+			this.position = position;
 			this.y = yPosition;
 			this.velocity = 0;
-			this.move = function(endPosition){
-				this.y += 2*Math.sign(endPosition - this.y);
+			this.acceleration = 0;
+			this.direction = 0;
+			this.move = function(endPosition, endRank){
+				this.direction = Math.sign(endRank - this.position);
+				if (Math.abs(endPosition - this.y) < (Math.abs(endPosition - this.position*110)/2)){
+					this.acceleration = -0.04 * Math.sign(endPosition - this.y);
+				} else {
+					this.acceleration = 0.04 * Math.sign(endPosition - this.y);
+				}
+				if (Math.abs(endPosition - this.y) < 5 && this.velocity < 0.1){
+					this.acceleration = 0;
+				}
+				this.velocity += this.acceleration;
+				if (this.velocity >= MAX_VELOCITY){
+					this.y += MAX_VELOCITY;
+				} else {
+					this.y += this.velocity;
+				}
+				if (Math.sign(endPosition - this.y) == -this.direction){
+					this.y = endPosition;
+					this.position = endRank;
+					this.velocity = 0;
+					this.acceleration = 0;
+					this.direction = 0;
+				}
 				document.getElementById(this.name).style.top = this.y + "px";
 			}
 				
 		}
 		
-		var schools = ["BFH","WHF","FRH","SAL","CLB"];
+		var schools = ["BFH","WHF","FRH","SAL","CLB","ABC","DEF","GHI","JKL"];
 		
 		function sortTiles(tileA, tileB){
 			return tileB.score - tileA.score;
@@ -45,7 +68,7 @@
 		function moveTiles(){
 			board = board.sort(sortTiles);
 			for (var i = 0; i < board.length; i++){
-				board[i].move(i*110);
+				board[i].move(i*110, i);
 			}
 			window.requestAnimationFrame(moveTiles);
 		}
@@ -53,7 +76,7 @@
 		function createBoardCards(cardList){
 			var body = document.getElementsByTagName("body")[0];
 			for (var i = 0; i < schools.length; i++){
-				board.push(new School(schools[i], 110*i));
+				board.push(new School(schools[i], 110*i, i));
 				var divElement = document.createElement("div")
 				divElement.id = schools[i];
 				divElement.style.top = (110*i)+"px";
