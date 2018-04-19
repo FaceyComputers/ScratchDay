@@ -29,7 +29,7 @@ function getCellValues(sheetID, range, majorDimension, callback) {
 		range: range,
 		majorDimension: majorDimension,
 		valueRenderOption: 'FORMATTED_VALUE',
-		dateTimeRenderOption: 'FORMATTED_STRING',
+		dateTimeRenderOption: 'FORMATTED_STRING'
 	};
 	var request = gapi.client.sheets.spreadsheets.values.get(params);
 	request.then(function(response) {
@@ -39,13 +39,39 @@ function getCellValues(sheetID, range, majorDimension, callback) {
 	});
 }
 
-function writeCellValues(sheetID, range, majorDimension, body, callback) {
+function writeCellValues(sheetID, range, majorDimension, values, callback) {
+	var params = {
+		spreadsheetId: sheetID,
+		range: range,
+		includeValuesInResponse: true,
+		valueInputOption: 'USER_ENTERED'
+	};
+	var body = {
+		range: range,
+		majorDimension: "majorDimension",
+		values: values
+	}
+	var request = gapi.client.sheets.spreadsheets.values.update(params, body);
+	request.then(function(response) {
+		callback(response.result.updatedData);
+	}, function(reason) {
+		console.error('error: ' + reason.result.error.message);
+	});
+}
+
+function appendCellValues(sheetID, range, majorDimension, values, callback) {
 	var params = {
 		spreadsheetId: sheetID,
 		range: range,
 		includeValuesInResponse: true,
 		valueInputOption: 'USER_ENTERED',
+		insertDataOption: 'INSERT_ROWS'
 	};
+	var body = {
+		range: range,
+		majorDimension: "majorDimension",
+		values: values
+	}
 	var request = gapi.client.sheets.spreadsheets.values.update(params, body);
 	request.then(function(response) {
 		callback(response.result.updatedData);
