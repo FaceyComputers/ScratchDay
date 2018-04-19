@@ -21,13 +21,13 @@
 </head>
 <body>
 	<script>
-		var board = [];
-		var MAX_VELOCITY = 400;
-		var ACCELERATION = 0.02;
-		var TILE_WIDTH = 100;
-		var TILE_SPACING = 10;
+		var board = [];//holds state of scoreboard
+		var MAX_VELOCITY = 4;//maximum velocity of tile
+		var ACCELERATION = 0.02;//global acceleration
+		var TILE_WIDTH = 100;//the width (technically css height) of a tile
+		var TILE_SPACING = 10;//#of pixels between each tile
 		
-		function School(schoolName, yPosition, rank){
+		function School(schoolName, yPosition, rank){//creates a new school
 			this.name = schoolName;
 			this.score = 0;
 			this.rank = rank;
@@ -35,7 +35,7 @@
 			this.velocity = 0;
 			this.acceleration = 0;
 			this.direction = 0;
-			this.move = function(endPosition, endRank){
+			this.move = function(endPosition, endRank){//animation function
 				this.direction = Math.sign(endRank - this.rank);
 				if (Math.abs(endPosition - this.y) <= (Math.abs(endPosition - this.rank*(TILE_SPACING+TILE_WIDTH))/2)){
 					this.acceleration = (0 - this.velocity*this.velocity)/(2*(endPosition - this.y));
@@ -64,19 +64,19 @@
 		
 		var schools = ["BFH","WHF","FRH","SAL","CLB","ABC","DEF","GHI","JKL"];
 		
-		function sortTiles(tileA, tileB){
+		function sortTiles(tileA, tileB){//method defining how to sort schools
 			return tileB.score - tileA.score;
 		}
 		
-		function moveTiles(){
+		function main(){//main loop
 			board = board.sort(sortTiles);
 			for (var i = 0; i < board.length; i++){
 				board[i].move(i*(TILE_SPACING+TILE_WIDTH), i);
 			}
-			window.requestAnimationFrame(moveTiles);
+			window.requestAnimationFrame(main);
 		}
 		
-		function createBoardTiles(tileNameList){
+		function createBoardTiles(tileNameList){//initialization function for board
 			var body = document.getElementsByTagName("body")[0];
 			for (var i = 0; i < tileNameList.length; i++){
 				board.push(new School(tileNameList[i], (TILE_SPACING+TILE_WIDTH)*i, i));
@@ -91,7 +91,7 @@
 			}
 		}
 		createBoardTiles(schools);
-		window.requestAnimationFrame(moveTiles);
+		window.requestAnimationFrame(main);
 	</script>
 <body>
 </html>
