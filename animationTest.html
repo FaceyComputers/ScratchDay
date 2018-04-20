@@ -23,7 +23,8 @@
 	<script>
 		var board = [];//holds state of scoreboard
 		var MAX_VELOCITY = 4;//maximum velocity of tile
-		var ACCELERATION = 0.02;//global acceleration
+		var ACCELERATION = 0.04;//global acceleration
+		var BRAKING_ACCELERATION = 0.01;
 		var TILE_WIDTH = 100;//the width (technically css height) of a tile
 		var TILE_SPACING = 10;//#of pixels between each tile
 		
@@ -36,24 +37,19 @@
 			this.acceleration = 0;
 			this.direction = 0;
 			this.move = function(endPosition, endRank){//animation function
-				this.direction = Math.sign(endRank - this.rank);
-				if (Math.abs(endPosition - this.y) <= (Math.abs(endPosition - this.rank*(TILE_SPACING+TILE_WIDTH))/2)){
-					this.acceleration = (0 - this.velocity*this.velocity)/(2*(endPosition - this.y));
-				} else {
-					this.acceleration = ACCELERATION * Math.sign(endPosition - this.y);
+				this.rank = endRank;
+				this.direction = Math.sign(endPosition - this.y);
+				this.acceleration = this.direction * ACCELERATION;
+				if (Math.abs((0-this.velocity*this.velocity)/(2*(endPosition - this.y)))> BRAKING_ACCELERATION && Math.sign(this.velocity) == this.direction){
+					this.acceleration = -this.direction * BRAKING_ACCELERATION;
 				}
-				if (Math.abs(endPosition - this.y) < 5 && Math.abs(this.velocity) < 0.01){
-					this.acceleration = 0;
+				if (Math.abs(this.velocity) >= MAX_VELOCITY && Math.sign(this.velocity) == this.direction){
+					this.velocity = MAX_VELOCITY*this.direction;
 				}
 				this.velocity += this.acceleration;
-				if (Math.abs(this.velocity) >= MAX_VELOCITY){
-					this.y += MAX_VELOCITY*this.direction;
-				} else {
-					this.y += this.velocity;
-				}
+				this.y += this.velocity;
 				if (Math.sign(endPosition - this.y) == -this.direction){
 					this.y = endPosition;
-					this.rank = endRank;
 					this.velocity = 0;
 					this.acceleration = 0;
 					this.direction = 0;
