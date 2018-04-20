@@ -1,128 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Add Points</title>
-<link href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i' rel='stylesheet' type='text/css'>
-<style>
-	body {
-		background: #25AFF4;
-		color: #FFFFFF;
-		text-align: center;
-		font-family: 'Product Sans', Arial, sans-serif;
-		font-size: 25px;
-	}
-	h1 {
-		font-size: 45px;
-	}
-	h2 {
-		font-size: 35px;
-		margin-top: 25px;
-	}
-	input[type="radio"]{
-		display: none;
-	}
-	label {
-		margin: -7px 10px;
-		padding: 40px 40px;
-		background: #F9A937;
-		font-size: 55px;
-		display: block;
-	}
-	.radio {
-		margin: auto;
-	}
-	input[type="button"]{
-		padding: 25px 40px;
-		border: none;
-		font-size: 35px;
-		background: #284BF9;
-		color: #FFFFFF;
-	}
-	select{
-		padding: 10px;
-		font-size: 30px;
-		border: none;
-	}
-	.error {
-		color: #FF0000;
-	}
-</style>
+	<meta charset="utf-8"/>
+	<title>Add Points</title>
+	<link href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+	
+	<p class = "jsError">Your browser does not appear to have JavaScript enabled.</p>
+	<p class = "jsError">This page requires JavaScript to function</p>
+	<p class = "jsError">Please switch to a browser that supports JavaScript, or enable it in your browser.</p>
+	
+	<script src="../../js/sheets_IO.js"></script>
+	<script src="sendData.js"></script>
+	<script async defer src="https://apis.google.com/js/api.js"
+		onload="handleClientLoad(main)"
+		onreadystatechange="if (this.readyState === 'complete') this.onload()">
+	</script>
+	
+	<div id="main">
 	<h1>EIPS Scratch Day</h1>
 	<h2>Select a school:<span class="error" id="schoolSelect"></span></h2>
-	<select id="school" onclick="clearErrors()">
+	
+	<select id="schools" onclick="clearErrors()">
 		<option value="">Select School:</option>
-		<option value="CLB">Clover Bar Jr. High</option>
-		<option value="CBN">Ecole Campbelltown</option>
-		<option value="AEL">Ecole Elementaire Ardrossan Elementary</option>
-		<option value="EPE">Ecole Parc Elementaire</option>
-		<option value="FSC">Fort Saskatchewan Christian</option>
-		<option value="FSE">Fort Saskatchewan Elementary</option>
-		<option value="FRH">F.R. Haythorne Jr. High</option>
-		<option value="LLR">Lakeland Ridge</option>
-		<option value="MUN">Mundare School</option>
-		<option value="SPO">Next Step</option>
-		<option value="PNE">Pine Street Elementary</option>
-		<option value="RHJ">Rudolph Hennig Jr. High</option>
-		<option value="SCE">Strathcona Christian Academy Elementary</option>
-		<option value="SCS">Strathcona Christian Academy Secondary</option>
-		<option value="WBO">Westboro Elementary</option>
-		<option value="WFG">Win Ferguson Elementary</option>
 	</select>
+	
 	<h2>Select challenge difficulty:<span class="error" id="pointSelect"></span></h2>
 	<div onclick="clearErrors()">
-	<input type="radio" name="points" id="3" value="3" onclick="grayOut()">
-	<label for="3"><span class="radio">Beginner</span></label><br>
-	<input type="radio" name="points" id="5" value="5" onclick="grayOut()">
-	<label for="5"><span class="radio">Intermediate</span></label><br>
-	<input type="radio" name="points" id="15" value="15" onclick="grayOut()">
-	<label for="15"><span class="radio">Advanced</span></label><br>
+		<input type="radio" name="points" id="3" value="3" onclick="grayOut()">
+		<label for="3"><span class="radio">Beginner</span></label><br>
+		<input type="radio" name="points" id="5" value="5" onclick="grayOut()">
+		<label for="5"><span class="radio">Intermediate</span></label><br>
+		<input type="radio" name="points" id="15" value="15" onclick="grayOut()">
+		<label for="15"><span class="radio">Advanced</span></label><br>
 	</div>
 	<input type="button" name="submit" value="Submit" onclick="sendData()">
 	<p id="demo"></p>
-	
-	<script>
-	function grayOut(){
-		var unchecked = document.querySelectorAll('input[name="points"]:not(:checked)+label');
-		unchecked[0].style.background = "#FFCA7D";
-		unchecked[1].style.background = "#FFCA7D";
-		document.querySelector('input[name="points"]:checked+label').style.background = "#F9A937";
-	}
-	
-	function clearErrors(){
-		document.getElementById("schoolSelect").innerHTML = "";
-		document.getElementById("pointSelect").innerHTML = "";
-	}
-	
-	function sendData(){
-		var xhttp = new XMLHttpRequest();
-		var school = document.getElementById("school");
-		var points = document.querySelector('input[name="points"]:checked');
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("demo").innerHTML = this.responseText;
-			}
-		};
-		if (school.value !== "" && points !== null){
-			var point = points.value;
-			xhttp.open("POST", "score.php", true);
-			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xhttp.send("getData=false&school=" + school.value + "&points=" + point);
-			var unchecked = document.querySelectorAll('input[type="radio"]:not(:checked) + label');
-			unchecked[0].style.background = "";
-			unchecked[1].style.background = "";
-			points.checked = false;
-			school.value = "";
-		} else {	
-			if (points === null){
-				document.getElementById("pointSelect").innerHTML = " *Required";
-			}
-			if (school.value === ""){
-				document.getElementById("schoolSelect").innerHTML = " *Required";
-			}
-		}
-	}
-	</script>
+	</div>
 </body>
 </html>

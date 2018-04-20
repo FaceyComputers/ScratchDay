@@ -65,16 +65,17 @@ function appendCellValues(sheetID, range, majorDimension, values, callback) {
 		range: range,
 		includeValuesInResponse: true,
 		valueInputOption: 'USER_ENTERED',
-		insertDataOption: 'INSERT_ROWS'
+		insertDataOption: 'OVERWRITE',
+		responseValueRenderOption: 'FORMATTED_VALUE'
 	};
 	var body = {
-		range: range,
-		majorDimension: "majorDimension",
-		values: values
+		"range": range,
+		"majorDimension": majorDimension,
+		"values": values
 	}
-	var request = gapi.client.sheets.spreadsheets.values.update(params, body);
+	var request = gapi.client.sheets.spreadsheets.values.append(params, body);
 	request.then(function(response) {
-		callback(response.result.updatedData);
+		callback(response.result);
 	}, function(reason) {
 		console.error('error: ' + reason.result.error.message);
 	});
@@ -83,14 +84,14 @@ function appendCellValues(sheetID, range, majorDimension, values, callback) {
 function handleClientLoad(signInUpdateCallback) {
 	gapi.load('client:auth2', function(){
 		var API_KEY = '';
-		var CLIENT_ID = '';
+		var CLIENT_ID = '485703690685-k9ubjpqfshdfvb0caplp28asac5k4963.apps.googleusercontent.com';
 		var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 	
 		gapi.client.init({
 			'apiKey': API_KEY,
 			'clientId': CLIENT_ID,
 			'scope': SCOPE,
-			'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+			'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4']
 		}).then(function() {
 			if (signInUpdateCallback === undefined){
 				signInUpdateCallback = function(loggedIn){console.log(loggedIn);}
