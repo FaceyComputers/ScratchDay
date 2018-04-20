@@ -1,22 +1,23 @@
 setInterval(changeTitle, 800);
 
-var text = ["EIPS Scratch Day", "Total Score: " + totalScore, "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore];
-
+//Scorebox
 var board = [];//holds state of scoreboard
 var MAX_VELOCITY = 4;//maximum velocity of tile
 var ACCELERATION = 0.02;//global acceleration
 var TILE_WIDTH = 100;//the width (technically css height) of a tile
 var TILE_SPACING = 10;//#of pixels between each tile
-var index = 0;
+var schools = ["BFH", "WHF", "FRH", "SAL", "CLB", "ABC"," DEF", "GHI", "JKL"];
+
+
+//Title
 var totalScore = 0;
-var debug = true;
 var totalBeginnerScore = 0;
 var totalIntermediateScore = 0;
 var totalAdvancedScore = 0;
-var y_axis = 147;
 var time = 0;
-var time = 0;
-var schools = ["BFH", "WHF", "FRH", "SAL", "CLB", "ABC"," DEF", "GHI", "JKL"];
+var index = 0;
+var text = ["EIPS Scratch Day", "Total Score: " + totalScore, "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore];
+
 
 function fadeIn(id)
 {
@@ -55,22 +56,17 @@ function changeTitle()
     }
     time++;
 }
-
-function start()
-{
-    createBoardTiles(schools);
-}
 		
 function School(schoolName, yPosition, rank) //creates a new school
 {
-			this.name = schoolName;
-			this.score = 0;
-			this.rank = rank;
-			this.y = yPosition;
-			this.velocity = 0;
-			this.acceleration = 0;
-			this.direction = 0;
-			this.move = function(endPosition, endRank){//animation function
+    this.name = schoolName;
+    this.score = 0;
+    this.rank = rank;
+    this.y = yPosition;
+    this.velocity = 0;
+    this.acceleration = 0;
+    this.direction = 0;
+    this.move = function(endPosition, endRank){//animation function
 				this.direction = Math.sign(endRank - this.rank);
 				if (Math.abs(endPosition - this.y) <= (Math.abs(endPosition - this.rank*(TILE_SPACING+TILE_WIDTH))/2)){
 					this.acceleration = (0 - this.velocity*this.velocity)/(2*(endPosition - this.y));
@@ -97,11 +93,13 @@ function School(schoolName, yPosition, rank) //creates a new school
             }
 }
 		
-function sortTiles(tileA, tileB){//method defining how to sort schools
+function sortTiles(tileA, tileB) //method defining how to sort schools
+{
     return tileB.score - tileA.score;
 }
 		
-function main(){//main loop
+function main() //main loop
+{
     board = board.sort(sortTiles);
     for (var i = 0; i < board.length; i++){
 	   board[i].move(i*(TILE_SPACING+TILE_WIDTH), i);
@@ -111,7 +109,7 @@ function main(){//main loop
 		
 function createBoardTiles(tileNameList) //initialization function for board
 {
-    var body = document.getElementsByClassName("scoreBox")[0];
+    var body = document.getElementsByTagName("div")[1];
     for (var i = 0; i < tileNameList.length; i++)
     {
         board.push(new School(tileNameList[i], (TILE_SPACING+TILE_WIDTH)*i, i));
@@ -124,6 +122,12 @@ function createBoardTiles(tileNameList) //initialization function for board
         divElement.appendChild(pElement);
         body.appendChild(divElement);
     }
+}
+
+function start()
+{
+    createBoardTiles(schools);
+    window.requestAnimationFrame(main);
 }
 
 

@@ -17,3 +17,38 @@ echo $variable . PHP_EOL;
 	}
             
     ?> 
+    
+    /*
+.Leaderboard > .School {
+    margin: -10px -10px -10px -10px;
+    text-shadow: 0.5px 0.5px #000000;
+    padding: 3px;
+    font-size: 40px;
+}
+
+.Leaderboard > .Score {
+    color: white;
+    margin-right: 101px;
+    display: inline-block;
+    text-shadow: 0.5px 0.5px #000000;
+    font-size: 26px;
+    margin: 10px 10px 10px 10px;
+    padding: 0px 0px -10px 0px;
+}
+
+.Leaderboard > .Total {
+    color: #F9A937;
+    text-shadow: 1px 1px #000000;
+    display: inline-block;
+    font-size: 28px;
+    margin: -10px -10px -10px 30px;
+}
+
+/*#Total{
+    text-align: center;
+    background-color: #25AFF4;
+    color: white;
+    margin: 27px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-family: 'Product Sans', Arial, sans-serif;
+}*/
