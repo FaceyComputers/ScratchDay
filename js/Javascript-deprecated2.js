@@ -247,3 +247,51 @@ $(setInterval(function () {
             });
     });
 }, 100));
+
+
+
+
+
+///
+
+/*var time = 0;
+var index = 0;
+var totalScore = 0;
+var debug = true;
+var totalBeginnerScore = 0;
+var totalIntermediateScore = 0;
+var totalAdvancedScore = 0;
+var y_axis = 147;
+
+var schoolNames = ["CLB", "FSE", "FRH", "FSC", "LLR", "MUN", "PNE", "RHJ", "SCE", "SCS", "WBO", "WFG", "SPO", "AEL", "CBN", "EPE"];
+var schoolFullNames = {};
+var schoolBeginner = {};
+var schoolIntermediate = {};
+var schoolAdvanced = {};
+var schoolTotal = {};*/
+
+function addSchoolBlock()
+{
+    for(var a = 0; a < schoolNames.length; a++)
+    {
+        var div = document.createElement("div");
+        //div.style.width = "px";
+        div.style.top = "10px";
+        div.style.height = (a + 100) + "px";
+        div.innerHTML = "Hello";
+        document.getElementById("Main").appendChild(div);
+    }
+}
+
+$(setInterval(function () {
+        $.getJSON("../testing/Score/data.json", function(result){
+            $.each(result.schools, function(school, schools){
+                schoolFullNames[schools.name] = schools.fullName;
+                schoolBeginner[schools.name] = schools.Beginner;
+                schoolIntermediate[schools.name] = schools.Intermediate;
+                schoolAdvanced[schools.name] = schools.Advanced;
+                schoolTotal[schools.name] = schools.Total;
+                //refreshScores();
+            });
+    });
+}, 100));
