@@ -1,4 +1,4 @@
-var SHEET_ID = "1vfJ5M8Vdt0fto9ZrjA5drVNj9gncsvnnE47O6nf1A1E";
+var SHEET_ID;
 
 window.onload = function() {
 	var jsErrorElements = document.getElementsByClassName("jsError");
@@ -6,12 +6,23 @@ window.onload = function() {
 		jsErrorElements[i].style.display = "none";
 	}
 	document.getElementById("main").style.visibility = "visible";
+	getSheetURL();
 	signIn();
+}
+
+function getSheetURL(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			SHEET_ID = this.responseText.match("spreadsheets/d/([a-zA-Z0-9-_]+)/edit")[1];
+		}
+	};
+	xhttp.open("GET", "sheetURL.txt", true);
+	xhttp.send();
 }
 
 function main(){
 	getCellValues(SHEET_ID, "Schools!A2:B50", "ROWS", function(values){
-		console.log(values);
 		changeSchoolSelector(values);
 	});
 }
