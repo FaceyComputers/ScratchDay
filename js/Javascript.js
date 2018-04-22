@@ -47,7 +47,7 @@ function changeTitle()
 {  
     text[1] = "Total Score: " + totalScore;
     text[2] = "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore;
-    if(time == 50)
+    if(time == 60)
     {  
         fadeIn("Main_title");
         document.getElementById("Main_title").innerHTML = text[index];
@@ -128,6 +128,7 @@ function main() //main loop
 				mainLoopCount = 0;
     }
     totalScore = 0;
+    totalBeginnerScore = 0;
     totalIntermediateScore = 0;
     totalAdvancedScore = 0;
     board = board.sort(sortTiles);
@@ -136,8 +137,8 @@ function main() //main loop
         board[i].move(i*(TILE_SPACING+TILE_WIDTH) + titleSpace, i);
         board[i].score = board[i].beginnerScore + board[i].intermediateScore + board[i].advancedScore; //Sets the total score equal to beginner+intermediate+advanced score
         
-        var test = document.getElementsByTagName("h2")[board[i].staticRank].innerHTML = board[i].name;
-        var test = document.getElementsByTagName("h3")[board[i].staticRank].innerHTML = "Beginner: " + board[i].beginnerScore + " Intermediate: " + board[i].intermediateScore + " Advanced: " + board[i].advancedScore + " Total Score: " + board[i].score;
+        document.getElementsByTagName("h2")[board[i].staticRank].innerHTML = board[i].name;
+        document.getElementsByTagName("h3")[board[i].staticRank].innerHTML = "Beginner: " + board[i].beginnerScore + " Intermediate: " + board[i].intermediateScore + " Advanced: " + board[i].advancedScore + " Total Score: " + board[i].score;
         totalScore = totalScore + board[i].score;
         totalBeginnerScore = totalBeginnerScore + board[i].beginnerScore;
         totalIntermediateScore = totalIntermediateScore + board[i].intermediateScore;
