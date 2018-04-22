@@ -3,7 +3,10 @@
 <body>
 <?php
 	$url = $_POST["sheetURL"];
-	echo $url;
+	$urlText = fopen("sheetURL.txt","w") or die("Unable to open file!");
+	fwrite($urlText,$url);
+	fclose($urlText);
+	echo "Scoreboard URL parameter changed successfully";
 ?>
 </body>
 </html>

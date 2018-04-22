@@ -13,13 +13,41 @@
 			background: #284BF9;
 			color: #FFFFFF;
 		}
+		input[type="button"]{
+			padding: 15px 25px;
+			border: none;
+			font-size: 20px;
+			background: #284BF9;
+			color: #FFFFFF;
+			display: none;
+		}
 	</style>
 </head>
 <body>
 	<h1>EIPS Scratch Day</h1>
 	<form action="updateSheetURL.php" method="POST">
-		<p>URL of spreadsheet: <input type="text" name="sheetURL"></p>
-		<input type="submit" value="Submit">
+		<p>URL of spreadsheet: <input type="text" id="sheetURL" name="sheetURL"></p>
+		<input type="button" name="submit" id="jsEnabledSubmit" value="Submit">
+		<input type="submit" id="fallbackSubmit" value="Submit">
 	</form>
+	<p id="response"></p>
+	<script>
+		window.onload = function() {
+			document.getElementById("jsEnabledSubmit").style.display = "initial";
+			document.getElementById("fallbackSubmit").style.display = "none";
+		}
+		
+		document.getElementById("jsEnabledSubmit").onclick = function(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("response").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("POST", "updateSheetURL.php", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("sheetURL=" + document.getElementById("sheetURL").value);
+		}
+	</script>
 </body>
 </html>

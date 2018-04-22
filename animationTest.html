@@ -20,7 +20,27 @@
 	</style>
 </head>
 <body>
+	<script src="js/sheets_IO.js"></script>
 	<script>
+		window.onload = function() {
+			getSheetURL();
+			signIn();
+		}
+		
+		function getSheetURL(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					SHEET_ID = this.responseText.match("spreadsheets/d/([a-zA-Z0-9-_]+)/edit")[1];
+				}
+			};
+			xhttp.open("GET", "testing/Score/sheetURL.txt", true);
+			xhttp.send();
+		}
+
+		var mainLoopCount = 0;
+		var rowNum = 2;
+		var SHEET_ID;
 		var board = [];//holds state of scoreboard
 		var MAX_VELOCITY = 4;//maximum velocity of tile
 		var ACCELERATION = 0.04;//global acceleration
@@ -29,13 +49,16 @@
 		var TILE_SPACING = 10;//#of pixels between each tile
 		
 		function School(schoolName, yPosition, rank){//creates a new school
-			this.name = schoolName;
+			this.schoolName = schoolName;
 			this.score = 0;
 			this.rank = rank;
 			this.y = yPosition;
 			this.velocity = 0;
 			this.acceleration = 0;
 			this.direction = 0;
+			this.beginnerScore = 0;
+			this.intermediateScore = 0;
+			this.advancedScore = 0;
 			this.move = function(endPosition, endRank){//animation function
 				this.rank = endRank;
 				this.direction = Math.sign(endPosition - this.y);
@@ -54,7 +77,10 @@
 					this.acceleration = 0;
 					this.direction = 0;
 				}
-				document.getElementById(this.name).style.top = this.y + "px";
+				document.getElementById(this.schoolName).style.top = this.y + "px";
+			}
+			this.totalScore = function(){
+				this.score = this.beginnerScore + this.intermediateScore + this.advancedScore;
 			}
 		}
 		
@@ -65,11 +91,46 @@
 		}
 		
 		function main(){//main loop
+			mainLoopCount++;
+			if (mainLoopCount == 600){
+				updateScores();
+				mainLoopCount = 0;
+			}
+			for (var i = 0; i<board.length; i++){
+				board[i].totalScore();
+			}
 			board = board.sort(sortTiles);
 			for (var i = 0; i < board.length; i++){
 				board[i].move(i*(TILE_SPACING+TILE_WIDTH), i);
 			}
 			window.requestAnimationFrame(main);
+		}
+		
+		function updateScores(){
+			var range = "Form Responses 1!B" + rowNum + ":C";
+			var schoolIndex = [];
+			for(var i = 0; i < board.length; i++){
+				schoolIndex.push(board[i].schoolName);
+			}
+			getCellValues(SHEET_ID,range,"ROWS",function(values){
+				if (values != undefined){
+					for (var i = 0; i<values.length; i++){
+						var school = schoolIndex.indexOf(values[i][0]);
+						switch(values[i][1]){
+							case "3":
+								board[school].beginnerScore += 3;
+								break;
+							case "5":
+								board[school].intermediateScore += 5;
+								break;
+							case "15":
+								board[school].advancedScore += 15;
+								break;
+						}
+					}
+					rowNum += values.length;
+				}
+			});
 		}
 		
 		function createBoardTiles(tileNameList){//initialization function for board
@@ -89,5 +150,9 @@
 		createBoardTiles(schools);
 		window.requestAnimationFrame(main);
 	</script>
-    </body>
+	<script async defer src="https://apis.google.com/js/api.js"
+		onload="handleClientLoad(main)"
+		onreadystatechange="if (this.readyState === 'complete') this.onload()">
+	</script>
+  </body>
 </html>

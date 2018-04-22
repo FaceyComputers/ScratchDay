@@ -61,7 +61,7 @@ function sendData(){
 		appendCellValues(SHEET_ID, "Form Responses 1!A:C",'ROWS', [[time,school.value,point.toString()]], function(values){
 			var result = values.updates.updatedData.values[0]
 			document.getElementById("demo").innerHTML = result[1] + " just earned " + result[2] + " points!";
-			console.log(values.updates.updatedData.values[0]);
+			console.log(result);
 		});
 		var unchecked = document.querySelectorAll('input[type="radio"]:not(:checked) + label');
 		unchecked[0].style.background = "";

@@ -41,7 +41,7 @@ select{
 	color: #FF0000;
 }
 .jserror {
-	display: black;
+	display: block;
 	position: absolute;
 }
 #main {
