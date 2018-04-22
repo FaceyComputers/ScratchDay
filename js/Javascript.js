@@ -66,27 +66,28 @@ function changeTitle()
 }
 
 window.onload = function() {
-			getSheetURL();
-			signIn();
-		}
+	getSheetURL();
+	signIn();
+}
 		
 function getSheetURL(){
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					SHEET_ID = this.responseText.match("spreadsheets/d/([a-zA-Z0-9-_]+)/edit")[1];
-				}
-			};
-			xhttp.open("GET", "/testing/Score/sheetURL.txt", true);
-			xhttp.send();
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			SHEET_ID = this.responseText.match("spreadsheets/d/([a-zA-Z0-9-_]+)/edit")[1];
 		}
+	};
+	xhttp.open("GET", "/testing/Score/sheetURL.txt", true);
+	xhttp.send();
+}
 		
-function School(schoolName, yPosition, rank){//creates a new school
-			this.name = schoolName;
+function School(schoolCode, schoolFullName, yPosition, rank){//creates a new school
+			this.schoolCode = schoolCode;
+			this.schoolFullName = schoolFullName;
 			this.score = 0;
-            this.beginnerScore = 0;
-            this.intermediateScore = 0;
-            this.advancedScore = 0;
+      this.beginnerScore = 0;
+      this.intermediateScore = 0;
+      this.advancedScore = 0;
 			this.rank = rank;
 			this.y = yPosition;
 			this.velocity = 0;
@@ -111,7 +112,7 @@ function School(schoolName, yPosition, rank){//creates a new school
 					this.acceleration = 0;
 					this.direction = 0;
 				}
-				document.getElementById(this.name).style.top = this.y + "px";
+				document.getElementById(this.schoolCode).style.top = this.y + "px";
 			}
 }
 		
@@ -136,7 +137,7 @@ function main() //main loop
         board[i].move(i*(TILE_SPACING+TILE_WIDTH) + titleSpace, i);
         board[i].score = board[i].beginnerScore + board[i].intermediateScore + board[i].advancedScore; //Sets the total score equal to beginner+intermediate+advanced score
         
-        var test = document.getElementsByTagName("h2")[board[i].staticRank].innerHTML = board[i].name;
+        var test = document.getElementsByTagName("h2")[board[i].staticRank].innerHTML = board[i].schoolFullName;
         var test = document.getElementsByTagName("h3")[board[i].staticRank].innerHTML = "Beginner: " + board[i].beginnerScore + " Intermediate: " + board[i].intermediateScore + " Advanced: " + board[i].advancedScore + " Total Score: " + board[i].score;
         totalScore = totalScore + board[i].score;
         totalBeginnerScore = totalBeginnerScore + board[i].beginnerScore;
@@ -150,7 +151,7 @@ function updateScores(){
 			var range = "Form Responses 1!B" + rowNum + ":C";
 			var schoolIndex = [];
 			for(var i = 0; i < board.length; i++){
-				schoolIndex.push(board[i].schoolName);
+				schoolIndex.push(board[i].schoolCode);
 			}
 			getCellValues(SHEET_ID,range,"ROWS",function(values){
 				if (values != undefined){
@@ -179,10 +180,10 @@ function createBoardTiles(tileNameList) //initialization function for board
     for (var i = 0; i < tileNameList.length; i++)
     {
         var divElement = document.createElement("div")
-        divElement.id = tileNameList[i];
+        divElement.id = tileNameList[i][0];
         divElement.style.top = ((TILE_SPACING+TILE_WIDTH)*i)+"px";
         var pElement = document.createElement("h2");
-        var nodes = document.createTextNode(tileNameList[i]);
+        var nodes = document.createTextNode(tileNameList[i][0]);
         var pElement1 = document.createElement("h3");
         var nodes1 = document.createTextNode("Score: 0");
         pElement.appendChild(nodes);
@@ -190,13 +191,16 @@ function createBoardTiles(tileNameList) //initialization function for board
         divElement.appendChild(pElement);
         divElement.appendChild(pElement1);
         body.appendChild(divElement);
-        board.push(new School(tileNameList[i], ((TILE_SPACING+TILE_WIDTH)*i) + titleSpace, i));
+        board.push(new School(tileNameList[i][0],tileNameList[i][1], ((TILE_SPACING+TILE_WIDTH)*i) + titleSpace, i));
     }
 }
 
 function start()
 {
-    createBoardTiles(schools);
+		getCellValues(SHEET_ID, "Schools!A2:B50", "ROWS", function(values){
+			console.log(values);
+			createBoardTiles(values);
+		});
     window.requestAnimationFrame(main);
 }
 
