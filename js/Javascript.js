@@ -6,6 +6,8 @@ var MAX_VELOCITY = 4;//maximum velocity of tile
 var ACCELERATION = 0.02;//global acceleration
 var TILE_WIDTH = 100;//the width (technically css height) of a tile
 var TILE_SPACING = 10;//#of pixels between each tile
+var BRAKING_ACCELERATION = 0.01;
+var titleSpace = 150;
 var schools = ["BFH", "WHF", "FRH", "SAL", "CLB", "ABC"," DEF", "GHI", "JKL"];
 
 
@@ -57,40 +59,34 @@ function changeTitle()
     time++;
 }
 		
-function School(schoolName, yPosition, rank) //creates a new school
-{
-    this.name = schoolName;
-    this.score = 0;
-    this.rank = rank;
-    this.y = yPosition;
-    this.velocity = 0;
-    this.acceleration = 0;
-    this.direction = 0;
-    this.move = function(endPosition, endRank){//animation function
-				this.direction = Math.sign(endRank - this.rank);
-				if (Math.abs(endPosition - this.y) <= (Math.abs(endPosition - this.rank*(TILE_SPACING+TILE_WIDTH))/2)){
-					this.acceleration = (0 - this.velocity*this.velocity)/(2*(endPosition - this.y));
-				} else {
-					this.acceleration = ACCELERATION * Math.sign(endPosition - this.y);
+function School(schoolName, yPosition, rank, beginnerRank, intermediateRank, advancedRank){//creates a new school
+			this.name = schoolName;
+			this.score = 0;
+			this.rank = rank;
+			this.y = yPosition;
+			this.velocity = 0;
+			this.acceleration = 0;
+			this.direction = 0;
+			this.move = function(endPosition, endRank){//animation function
+				this.rank = endRank;
+				this.direction = Math.sign(endPosition - this.y);
+				this.acceleration = this.direction * ACCELERATION;
+				if (Math.abs((0-this.velocity*this.velocity)/(2*(endPosition - this.y)))> BRAKING_ACCELERATION && Math.sign(this.velocity) == this.direction){
+					this.acceleration = -this.direction * BRAKING_ACCELERATION;
 				}
-				if (Math.abs(endPosition - this.y) < 5 && Math.abs(this.velocity) < 0.01){
-					this.acceleration = 0;
+				if (Math.abs(this.velocity) >= MAX_VELOCITY && Math.sign(this.velocity) == this.direction){
+					this.velocity = MAX_VELOCITY*this.direction;
 				}
 				this.velocity += this.acceleration;
-				if (Math.abs(this.velocity) >= MAX_VELOCITY){
-					this.y += MAX_VELOCITY*this.direction;
-				} else {
-					this.y += this.velocity;
-				}
+				this.y += this.velocity;
 				if (Math.sign(endPosition - this.y) == -this.direction){
 					this.y = endPosition;
-					this.rank = endRank;
 					this.velocity = 0;
 					this.acceleration = 0;
 					this.direction = 0;
 				}
 				document.getElementById(this.name).style.top = this.y + "px";
-            }
+			}
 }
 		
 function sortTiles(tileA, tileB) //method defining how to sort schools
@@ -102,7 +98,8 @@ function main() //main loop
 {
     board = board.sort(sortTiles);
     for (var i = 0; i < board.length; i++){
-	   board[i].move(i*(TILE_SPACING+TILE_WIDTH), i);
+	   board[i].move(i*(TILE_SPACING+TILE_WIDTH) + titleSpace, i);
+        var test = document.getElementsByTagName("p")[i].innerHTML = board[i].name + " Score: " + board[i].score;
     }
     window.requestAnimationFrame(main);
 }
@@ -112,15 +109,15 @@ function createBoardTiles(tileNameList) //initialization function for board
     var body = document.getElementsByTagName("div")[1];
     for (var i = 0; i < tileNameList.length; i++)
     {
-        board.push(new School(tileNameList[i], (TILE_SPACING+TILE_WIDTH)*i, i));
         var divElement = document.createElement("div")
         divElement.id = tileNameList[i];
         divElement.style.top = ((TILE_SPACING+TILE_WIDTH)*i)+"px";
         var pElement = document.createElement("p");
-        var node = document.createTextNode(tileNameList[i]);
-        pElement.appendChild(node);
+        var nodes = document.createTextNode(tileNameList[i] + " Scorge: 0");
+        pElement.appendChild(nodes);
         divElement.appendChild(pElement);
         body.appendChild(divElement);
+        board.push(new School(tileNameList[i], ((TILE_SPACING+TILE_WIDTH)*i) + titleSpace, i, 0, 0, 0));
     }
 }
 

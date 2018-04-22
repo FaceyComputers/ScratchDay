@@ -24,23 +24,27 @@
 }*/
 
 .scoreBox > div {
-    background-color:#25AFF4;
+    background-color: #25AFF4;
+    font-size: 30px;
+    color: white;
+    text-shadow: 1px 1px #000000;
+    font-family: 'Product Sans', Arial, sans-serif;
     position: absolute;
-    width: 90%;
+    width: 99%;
     height: 100px;
     z-index: -1;
 }
 
 .scoreBox {
-    top: 10px;
+    top:30px;
 }
 
 p {
-position: absolute;
-top: 50%;
-left: 50%;
-margin: 0;
-transform:translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transform:translate(-50%,-50%);
 }
 
 /*#credit{
