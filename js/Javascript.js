@@ -1,10 +1,10 @@
-setInterval(changeTitle, 800);
+//setInterval(changeTitle, 800);
 
 //Scorebox
 var board = [];//holds state of scoreboard
 var MAX_VELOCITY = 4;//maximum velocity of tile
-var ACCELERATION = 0.02;//global acceleration
-var TILE_WIDTH = 100;//the width (technically css height) of a tile
+var ACCELERATION = 0.10;//global acceleration
+var TILE_WIDTH = 110;//the width (technically css height) of a tile
 var TILE_SPACING = 10;//#of pixels between each tile
 var BRAKING_ACCELERATION = 0.01;
 var titleSpace = 150;
@@ -18,7 +18,8 @@ var totalIntermediateScore = 0;
 var totalAdvancedScore = 0;
 var time = 0;
 var index = 0;
-var text = ["EIPS Scratch Day", "Total Score: " + totalScore, "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore];
+var changeInterval = 300;
+var text = ["EIPS Scratch Day"];
 
 
 function fadeIn(id)
@@ -41,12 +42,14 @@ function fadeOut(id)
 
 function changeTitle()
 {  
-    if(time == 1)
+    text[1] = "Total Score: " + totalScore;
+    text[2] = "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore;
+    if(time == 50)
     {  
         fadeIn("Main_title");
         document.getElementById("Main_title").innerHTML = text[index];
     }
-    if(time >= 10)
+    if(time >= changeInterval)
     {
         fadeOut("Main_title");
         time = 0;
@@ -59,14 +62,18 @@ function changeTitle()
     time++;
 }
 		
-function School(schoolName, yPosition, rank, beginnerRank, intermediateRank, advancedRank){//creates a new school
+function School(schoolName, yPosition, rank){//creates a new school
 			this.name = schoolName;
 			this.score = 0;
+            this.beginnerScore = 0;
+            this.intermediateScore = 0;
+            this.advancedScore = 0;
 			this.rank = rank;
 			this.y = yPosition;
 			this.velocity = 0;
 			this.acceleration = 0;
 			this.direction = 0;
+            this.staticRank = rank;
 			this.move = function(endPosition, endRank){//animation function
 				this.rank = endRank;
 				this.direction = Math.sign(endPosition - this.y);
@@ -96,10 +103,21 @@ function sortTiles(tileA, tileB) //method defining how to sort schools
 		
 function main() //main loop
 {
+    totalScore = 0;
+    totalIntermediateScore = 0;
+    totalAdvancedScore = 0;
     board = board.sort(sortTiles);
+    changeTitle();
     for (var i = 0; i < board.length; i++){
-	   board[i].move(i*(TILE_SPACING+TILE_WIDTH) + titleSpace, i);
-        var test = document.getElementsByTagName("p")[i].innerHTML = board[i].name + " Score: " + board[i].score;
+        board[i].move(i*(TILE_SPACING+TILE_WIDTH) + titleSpace, i);
+        board[i].score = board[i].beginnerScore + board[i].intermediateScore + board[i].advancedScore; //Sets the total score equal to beginner+intermediate+advanced score
+        
+        var test = document.getElementsByTagName("h2")[board[i].staticRank].innerHTML = board[i].name;
+        var test = document.getElementsByTagName("h3")[board[i].staticRank].innerHTML = "Beginner: " + board[i].beginnerScore + " Intermediate: " + board[i].intermediateScore + " Advanced: " + board[i].advancedScore + " Total Score: " + board[i].score;
+        totalScore = totalScore + board[i].score;
+        totalBeginnerScore = totalBeginnerScore + board[i].beginnerScore;
+        totalIntermediateScore = totalIntermediateScore + board[i].intermediateScore;
+        totalAdvancedScore = totalAdvancedScore + board[i].advancedScore;
     }
     window.requestAnimationFrame(main);
 }
@@ -112,12 +130,16 @@ function createBoardTiles(tileNameList) //initialization function for board
         var divElement = document.createElement("div")
         divElement.id = tileNameList[i];
         divElement.style.top = ((TILE_SPACING+TILE_WIDTH)*i)+"px";
-        var pElement = document.createElement("p");
-        var nodes = document.createTextNode(tileNameList[i] + " Scorge: 0");
+        var pElement = document.createElement("h2");
+        var nodes = document.createTextNode(tileNameList[i]);
+        var pElement1 = document.createElement("h3");
+        var nodes1 = document.createTextNode("Score: 0");
         pElement.appendChild(nodes);
+        pElement1.appendChild(nodes1);
         divElement.appendChild(pElement);
+        divElement.appendChild(pElement1);
         body.appendChild(divElement);
-        board.push(new School(tileNameList[i], ((TILE_SPACING+TILE_WIDTH)*i) + titleSpace, i, 0, 0, 0));
+        board.push(new School(tileNameList[i], ((TILE_SPACING+TILE_WIDTH)*i) + titleSpace, i));
     }
 }
 
