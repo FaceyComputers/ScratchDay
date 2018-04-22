@@ -31,7 +31,7 @@
     font-family: 'Product Sans', Arial, sans-serif;
     position: absolute;
     width: 99%;
-    height: 100px;
+    height: 110px;
     z-index: -1;
 }
 
@@ -39,11 +39,22 @@
     top:30px;
 }
 
-p {
+h2 {
+    color: orange;
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     margin: 0;
+    transform:translate(-50%,-50%);
+}
+
+h3 {
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    left: 50%;
+    //margin-left: 0px;
+    margin-right: -1000px;
     transform:translate(-50%,-50%);
 }
 
