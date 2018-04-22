@@ -1,6 +1,9 @@
 //setInterval(changeTitle, 800);
 
 //Scorebox
+var mainLoopCount = 0;
+var rowNum = 2;
+var SHEET_ID;
 var board = [];//holds state of scoreboard
 var MAX_VELOCITY = 4;//maximum velocity of tile
 var ACCELERATION = 0.10;//global acceleration
@@ -61,6 +64,22 @@ function changeTitle()
     }
     time++;
 }
+
+window.onload = function() {
+			getSheetURL();
+			signIn();
+		}
+		
+function getSheetURL(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					SHEET_ID = this.responseText.match("spreadsheets/d/([a-zA-Z0-9-_]+)/edit")[1];
+				}
+			};
+			xhttp.open("GET", "/testing/Score/sheetURL.txt", true);
+			xhttp.send();
+		}
 		
 function School(schoolName, yPosition, rank){//creates a new school
 			this.name = schoolName;
@@ -103,6 +122,11 @@ function sortTiles(tileA, tileB) //method defining how to sort schools
 		
 function main() //main loop
 {
+    mainLoopCount++;
+    if (mainLoopCount == 600){
+				updateScores();
+				mainLoopCount = 0;
+    }
     totalScore = 0;
     totalIntermediateScore = 0;
     totalAdvancedScore = 0;
@@ -121,6 +145,33 @@ function main() //main loop
     }
     window.requestAnimationFrame(main);
 }
+
+function updateScores(){
+			var range = "Form Responses 1!B" + rowNum + ":C";
+			var schoolIndex = [];
+			for(var i = 0; i < board.length; i++){
+				schoolIndex.push(board[i].schoolName);
+			}
+			getCellValues(SHEET_ID,range,"ROWS",function(values){
+				if (values != undefined){
+					for (var i = 0; i<values.length; i++){
+						var school = schoolIndex.indexOf(values[i][0]);
+						switch(values[i][1]){
+							case "3":
+								board[school].beginnerScore += 3;
+								break;
+							case "5":
+								board[school].intermediateScore += 5;
+								break;
+							case "15":
+								board[school].advancedScore += 15;
+								break;
+						}
+					}
+					rowNum += values.length;
+				}
+			});
+		}
 		
 function createBoardTiles(tileNameList) //initialization function for board
 {
