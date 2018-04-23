@@ -11,8 +11,6 @@ var TILE_WIDTH = 110;//the width (technically css height) of a tile
 var TILE_SPACING = 10;//#of pixels between each tile
 var BRAKING_ACCELERATION = 0.01;
 var titleSpace = 150;
-var schools = ["BFH", "WHF", "FRH", "SAL", "CLB", "ABC"," DEF", "GHI", "JKL"];
-
 
 //Title
 var totalScore = 0;
@@ -22,7 +20,7 @@ var totalAdvancedScore = 0;
 var time = 0;
 var index = 0;
 var changeInterval = 300;
-var text = ["EIPS Scratch Day"];
+var text = ["EIPS Scratch Day " + new Date().getFullYear()];
 
 
 function fadeIn(id)
