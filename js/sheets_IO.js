@@ -84,7 +84,7 @@ function appendCellValues(sheetID, range, majorDimension, values, callback) {
 function handleClientLoad(signInUpdateCallback) {
 	gapi.load('client:auth2', function(){
 		var API_KEY = '';
-		var CLIENT_ID = '485703690685-k9ubjpqfshdfvb0caplp28asac5k4963.apps.googleusercontent.com';
+		var CLIENT_ID = ' ';
 		var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 	
 		gapi.client.init({
