@@ -43,12 +43,28 @@ function fadeOut(id)
     document.getElementById(id).style.OTransition = "all 1s"; 
 }
 
+function addTotalScore()
+{
+    totalScore = 0;
+    totalBeginnerScore = 0;
+    totalIntermediateScore = 0;
+    totalAdvancedScore = 0;
+    		for(var i = 0; i < board.length; i++)
+    		{
+    		totalScore = totalScore + board[i].score;
+        totalBeginnerScore = totalBeginnerScore + board[i].beginnerScore;
+        totalIntermediateScore = totalIntermediateScore + board[i].intermediateScore;
+        totalAdvancedScore = totalAdvancedScore + board[i].advancedScore;
+    		}
+}
+
 function changeTitle()
 {  
     text[1] = "Total Score: " + totalScore;
     text[2] = "Beginner: " + totalBeginnerScore + " Intermediate: " + totalIntermediateScore + " Advanced: " + totalAdvancedScore;
-    if(time == 50)
+    if(time == changeInterval-235)
     {  
+				addTotalScore();
         fadeIn("Main_title");
         document.getElementById("Main_title").innerHTML = text[index];
     }
@@ -57,6 +73,7 @@ function changeTitle()
         fadeOut("Main_title");
         time = 0;
         index++;
+        addTotalScore();
         if(index >= text.length)
         {
             index = 0;
@@ -128,21 +145,13 @@ function main() //main loop
 				updateScores();
 				mainLoopCount = 0;
     }
-    totalScore = 0;
-    totalIntermediateScore = 0;
-    totalAdvancedScore = 0;
     board = board.sort(sortTiles);
     changeTitle();
     for (var i = 0; i < board.length; i++){
         board[i].move(i*(TILE_SPACING+TILE_WIDTH) + titleSpace, i);
         board[i].score = board[i].beginnerScore + board[i].intermediateScore + board[i].advancedScore; //Sets the total score equal to beginner+intermediate+advanced score
-        
-        var test = document.getElementsByTagName("h2")[board[i].staticRank].innerHTML = board[i].schoolFullName;
-        var test = document.getElementsByTagName("h3")[board[i].staticRank].innerHTML = "Beginner: " + board[i].beginnerScore + " Intermediate: " + board[i].intermediateScore + " Advanced: " + board[i].advancedScore + " Total Score: " + board[i].score;
-        totalScore = totalScore + board[i].score;
-        totalBeginnerScore = totalBeginnerScore + board[i].beginnerScore;
-        totalIntermediateScore = totalIntermediateScore + board[i].intermediateScore;
-        totalAdvancedScore = totalAdvancedScore + board[i].advancedScore;
+        document.getElementsByTagName("h2")[board[i].staticRank].innerHTML = board[i].schoolFullName;
+        document.getElementsByTagName("h3")[board[i].staticRank].innerHTML = "Beginner: " + board[i].beginnerScore + " Intermediate: " + board[i].intermediateScore + " Advanced: " + board[i].advancedScore + " Total Score: " + board[i].score;
     }
     window.requestAnimationFrame(main);
 }
